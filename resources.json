@@ -1,633 +1,663 @@
 [
   {
-    "id": 1,
-    "name": "Google",
-    "url": "https://google.com",
-    "category": "Motori di ricerca",
-    "price": "Gratuito",
-    "description": "Motori di ricerca · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 2,
-    "name": "Bing",
-    "url": "https://bing.com",
-    "category": "Motori di ricerca",
-    "price": "Gratuito",
-    "description": "Motori di ricerca · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 3,
-    "name": "DuckDuckGo",
-    "url": "https://duckduckgo.com",
-    "category": "Motori di ricerca",
-    "price": "Gratuito",
-    "description": "Motori di ricerca · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 4,
-    "name": "Brave Search",
-    "url": "https://search.brave.com",
-    "category": "Motori di ricerca",
-    "price": "Gratuito",
-    "description": "Motori di ricerca · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 5,
-    "name": "Google Scholar",
-    "url": "https://scholar.google.com",
-    "category": "Motori di ricerca",
-    "price": "Gratuito",
-    "description": "Motori di ricerca · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
     "id": 6,
     "name": "RIPEstat",
-    "url": "https://stat.ripe.net",
-    "category": "IP e domini",
+    "url": "https://stat.ripe.net/",
+    "category": "IP, ISP e ASN",
     "price": "Gratuito",
-    "description": "IP e domini · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 7,
-    "name": "ICANN Lookup",
-    "url": "https://lookup.icann.org",
-    "category": "IP e domini",
-    "price": "Gratuito",
-    "description": "IP e domini · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 8,
-    "name": "crt.sh",
-    "url": "https://crt.sh",
-    "category": "IP e domini",
-    "price": "Gratuito",
-    "description": "IP e domini · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Prefissi, ASN e dati di routing.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 9,
     "name": "IPinfo",
-    "url": "https://ipinfo.io",
-    "category": "IP e domini",
+    "url": "https://ipinfo.io/",
+    "category": "IP, ISP e ASN",
     "price": "Freemium",
-    "description": "IP e domini · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Operatore, ASN e contesto geografico IP.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 10,
-    "name": "ViewDNS",
-    "url": "https://viewdns.info",
-    "category": "IP e domini",
-    "price": "Freemium",
-    "description": "IP e domini · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "id": 103,
+    "name": "ARIN Whois",
+    "url": "https://search.arin.net/rdap/",
+    "category": "IP, ISP e ASN",
+    "price": "Gratuito",
+    "description": "Registrazioni di risorse numeriche ARIN.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 11,
-    "name": "DNSDumpster",
-    "url": "https://dnsdumpster.com",
-    "category": "IP e domini",
-    "price": "Freemium",
-    "description": "IP e domini · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "id": 104,
+    "name": "CentralOps",
+    "url": "https://centralops.net/co/",
+    "category": "IP, ISP e ASN",
+    "price": "Gratuito",
+    "description": "Interrogazioni DNS e informazioni di rete.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 12,
     "name": "BGP HE",
-    "url": "https://bgp.he.net",
-    "category": "IP e domini",
+    "url": "https://bgp.he.net/",
+    "category": "IP, ISP e ASN",
     "price": "Gratuito",
-    "description": "IP e domini · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Prefissi e relazioni tra sistemi autonomi.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 13,
-    "name": "Google Lens",
-    "url": "https://lens.google.com",
-    "category": "Immagini inverse",
+    "id": 105,
+    "name": "IPLocation.net",
+    "url": "https://www.iplocation.net/ip-lookup",
+    "category": "Geolocalizzazione IP",
     "price": "Gratuito",
-    "description": "Immagini inverse · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Confronto di database geografici IP.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 14,
-    "name": "Bing Visual Search",
-    "url": "https://bing.com/visualsearch",
-    "category": "Immagini inverse",
-    "price": "Gratuito",
-    "description": "Immagini inverse · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 15,
-    "name": "Yandex Images",
-    "url": "https://yandex.com/images",
-    "category": "Immagini inverse",
-    "price": "Gratuito",
-    "description": "Immagini inverse · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 16,
-    "name": "TinEye",
-    "url": "https://tineye.com",
-    "category": "Immagini inverse",
+    "id": 106,
+    "name": "IPLocation.io",
+    "url": "https://iplocation.io/",
+    "category": "Geolocalizzazione IP",
     "price": "Freemium",
-    "description": "Immagini inverse · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Contesto geografico e di rete.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 17,
-    "name": "ExifTool",
-    "url": "https://exiftool.org",
-    "category": "Immagini e video",
-    "price": "Gratuito",
-    "description": "Immagini e video · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 18,
-    "name": "Forensically",
-    "url": "https://29a.ch/photo-forensics/",
-    "category": "Immagini e video",
-    "price": "Gratuito",
-    "description": "Immagini e video · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 19,
-    "name": "FotoForensics",
-    "url": "https://fotoforensics.com",
-    "category": "Immagini e video",
-    "price": "Gratuito",
-    "description": "Immagini e video · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 20,
-    "name": "MediaInfo",
-    "url": "https://mediaarea.net/MediaInfo",
-    "category": "Immagini e video",
-    "price": "Gratuito",
-    "description": "Immagini e video · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 21,
-    "name": "InVID",
-    "url": "https://www.invid-project.eu",
-    "category": "Immagini e video",
-    "price": "Gratuito",
-    "description": "Immagini e video · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 22,
-    "name": "Facebook",
-    "url": "https://facebook.com",
-    "category": "Social network",
-    "price": "Gratuito",
-    "description": "Social network · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 23,
-    "name": "Instagram",
-    "url": "https://instagram.com",
-    "category": "Social network",
-    "price": "Gratuito",
-    "description": "Social network · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 24,
-    "name": "LinkedIn",
-    "url": "https://linkedin.com",
-    "category": "Social network",
+    "id": 107,
+    "name": "IP2Location",
+    "url": "https://www.ip2location.com/",
+    "category": "Geolocalizzazione IP",
     "price": "Freemium",
-    "description": "Social network · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Database geografico IP.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 25,
-    "name": "Reddit",
-    "url": "https://reddit.com",
-    "category": "Social network",
-    "price": "Gratuito",
-    "description": "Social network · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 26,
-    "name": "TikTok",
-    "url": "https://tiktok.com",
-    "category": "Social network",
-    "price": "Gratuito",
-    "description": "Social network · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 27,
-    "name": "X",
-    "url": "https://x.com",
-    "category": "Social network",
+    "id": 108,
+    "name": "DB-IP",
+    "url": "https://db-ip.com/",
+    "category": "Geolocalizzazione IP",
     "price": "Freemium",
-    "description": "Social network · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Localizzazione indicativa e rete.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 7,
+    "name": "ICANN Lookup",
+    "url": "https://lookup.icann.org/",
+    "category": "Domini e DNS",
+    "price": "Gratuito",
+    "description": "Dati di registrazione RDAP dei domini.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 11,
+    "name": "DNSDumpster",
+    "url": "https://dnsdumpster.com/",
+    "category": "Domini e DNS",
+    "price": "Freemium",
+    "description": "Mappatura di record DNS e host.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 8,
+    "name": "crt.sh",
+    "url": "https://crt.sh/",
+    "category": "Domini e DNS",
+    "price": "Gratuito",
+    "description": "Ricerca nei registri Certificate Transparency.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 10,
+    "name": "ViewDNS",
+    "url": "https://viewdns.info/",
+    "category": "Domini e DNS",
+    "price": "Freemium",
+    "description": "Strumenti DNS e reverse lookup.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 32,
+    "name": "MXToolbox",
+    "url": "https://mxtoolbox.com/",
+    "category": "Domini e DNS",
+    "price": "Freemium",
+    "description": "Record MX, SPF, DNS e diagnostica posta.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 109,
+    "name": "SecurityTrails",
+    "url": "https://securitytrails.com/",
+    "category": "Domini e DNS",
+    "price": "Freemium",
+    "description": "Dati DNS e storico delle infrastrutture.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 110,
+    "name": "DNSlytics",
+    "url": "https://dnslytics.com/",
+    "category": "Domini e DNS",
+    "price": "Freemium",
+    "description": "Correlazioni tra domini e reti.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 28,
     "name": "Sherlock",
     "url": "https://github.com/sherlock-project/sherlock",
-    "category": "Username ed email",
+    "category": "Username",
     "price": "Gratuito",
-    "description": "Username ed email · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca nickname su diversi servizi, installazione locale.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 29,
     "name": "Maigret",
     "url": "https://github.com/soxoj/maigret",
-    "category": "Username ed email",
+    "category": "Username",
     "price": "Gratuito",
-    "description": "Username ed email · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Verifica nickname e genera report locali.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 30,
     "name": "WhatsMyName",
-    "url": "https://whatsmyname.app",
-    "category": "Username ed email",
+    "url": "https://whatsmyname.app/",
+    "category": "Username",
     "price": "Gratuito",
-    "description": "Username ed email · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca pubblica di username da browser.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 31,
-    "name": "Namechk",
-    "url": "https://namechk.com",
-    "category": "Username ed email",
+    "id": 111,
+    "name": "Instant Username Search",
+    "url": "https://instantusername.com/",
+    "category": "Username",
     "price": "Gratuito",
-    "description": "Username ed email · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Verifica disponibilità o presenza di nomi utente.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 32,
-    "name": "MXToolbox",
-    "url": "https://mxtoolbox.com",
-    "category": "Username ed email",
+    "id": 112,
+    "name": "Blackbird",
+    "url": "https://github.com/p1ngul1n0/blackbird",
+    "category": "Username",
+    "price": "Gratuito",
+    "description": "Ricerca nickname, installazione locale.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 113,
+    "name": "Hunter",
+    "url": "https://hunter.io/",
+    "category": "Email",
     "price": "Freemium",
-    "description": "Username ed email · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca di contatti professionali pubblici e verifica email.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 33,
-    "name": "Have I Been Pwned",
-    "url": "https://haveibeenpwned.com",
-    "category": "Username ed email",
+    "id": 114,
+    "name": "Epieos",
+    "url": "https://epieos.com/",
+    "category": "Email",
     "price": "Freemium",
-    "description": "Username ed email · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca di indicatori pubblici collegati a identificativi, con limiti di copertura.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 34,
-    "name": "Google Maps",
-    "url": "https://maps.google.com",
-    "category": "Geolocalizzazione",
+    "id": 115,
+    "name": "ITU",
+    "url": "https://www.itu.int/",
+    "category": "Numeri telefonici",
     "price": "Gratuito",
-    "description": "Geolocalizzazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Riferimenti internazionali sui piani di numerazione.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 116,
+    "name": "AGCOM",
+    "url": "https://www.agcom.it/",
+    "category": "Numeri telefonici",
+    "price": "Gratuito",
+    "description": "Normativa italiana e piano di numerazione.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 13,
+    "name": "Google Lens",
+    "url": "https://lens.google/",
+    "category": "Immagini inverse",
+    "price": "Gratuito",
+    "description": "Ricerca visuale di oggetti e immagini simili.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 16,
+    "name": "TinEye",
+    "url": "https://tineye.com/",
+    "category": "Immagini inverse",
+    "price": "Freemium",
+    "description": "Ricerca di copie e varianti di immagini.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 15,
+    "name": "Yandex Images",
+    "url": "https://yandex.com/images/",
+    "category": "Immagini inverse",
+    "price": "Gratuito",
+    "description": "Ricerca visuale di immagini e oggetti.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 14,
+    "name": "Bing Visual Search",
+    "url": "https://www.bing.com/visualsearch",
+    "category": "Immagini inverse",
+    "price": "Gratuito",
+    "description": "Ricerca visuale di contenuti correlati.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 17,
+    "name": "ExifTool",
+    "url": "https://exiftool.org/",
+    "category": "Analisi foto e video",
+    "price": "Gratuito",
+    "description": "Lettura di metadati su copie di lavoro.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 18,
+    "name": "Forensically",
+    "url": "https://29a.ch/photo-forensics/",
+    "category": "Analisi foto e video",
+    "price": "Gratuito",
+    "description": "Analisi visuale di possibili alterazioni.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 19,
+    "name": "FotoForensics",
+    "url": "https://fotoforensics.com/",
+    "category": "Analisi foto e video",
+    "price": "Gratuito",
+    "description": "Analisi di compressione e altri indicatori.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 20,
+    "name": "MediaInfo",
+    "url": "https://mediaarea.net/MediaInfo",
+    "category": "Analisi foto e video",
+    "price": "Gratuito",
+    "description": "Caratteristiche tecniche dei file multimediali.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 21,
+    "name": "InVID",
+    "url": "https://www.invid-project.eu/tools-and-services/invid-verification-plugin/",
+    "category": "Analisi foto e video",
+    "price": "Gratuito",
+    "description": "Estrazione fotogrammi e verifica video.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 117,
+    "name": "Diffchecker",
+    "url": "https://www.diffchecker.com/image-compare/",
+    "category": "Analisi foto e video",
+    "price": "Freemium",
+    "description": "Confronto visivo di immagini.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 118,
+    "name": "Sightengine",
+    "url": "https://sightengine.com/",
+    "category": "Analisi foto e video",
+    "price": "Freemium",
+    "description": "Indicatori probabilistici di contenuti sintetici.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 35,
     "name": "Google Earth",
-    "url": "https://earth.google.com",
-    "category": "Geolocalizzazione",
+    "url": "https://earth.google.com/",
+    "category": "Geolocalizzazione visiva",
     "price": "Gratuito",
-    "description": "Geolocalizzazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Immagini satellitari e contesto geografico.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 34,
+    "name": "Google Maps",
+    "url": "https://maps.google.com/",
+    "category": "Geolocalizzazione visiva",
+    "price": "Gratuito",
+    "description": "Cartografia e Street View per riscontri visivi.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 36,
     "name": "OpenStreetMap",
-    "url": "https://openstreetmap.org",
-    "category": "Geolocalizzazione",
+    "url": "https://www.openstreetmap.org/",
+    "category": "Geolocalizzazione visiva",
     "price": "Gratuito",
-    "description": "Geolocalizzazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Cartografia collaborativa.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 37,
     "name": "SunCalc",
-    "url": "https://suncalc.org",
-    "category": "Geolocalizzazione",
+    "url": "https://www.suncalc.org/",
+    "category": "Geolocalizzazione visiva",
     "price": "Gratuito",
-    "description": "Geolocalizzazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Posizione del sole rispetto a data e luogo.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 119,
+    "name": "ShadowMap",
+    "url": "https://app.shadowmap.org/",
+    "category": "Geolocalizzazione visiva",
+    "price": "Freemium",
+    "description": "Simulazione delle ombre.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 38,
     "name": "Mapillary",
-    "url": "https://mapillary.com",
-    "category": "Geolocalizzazione",
+    "url": "https://www.mapillary.com/",
+    "category": "Geolocalizzazione visiva",
     "price": "Gratuito",
-    "description": "Geolocalizzazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Immagini stradali georeferenziate.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 120,
+    "name": "Overpass Turbo",
+    "url": "https://overpass-turbo.eu/",
+    "category": "Geolocalizzazione visiva",
+    "price": "Gratuito",
+    "description": "Interrogazione di elementi OpenStreetMap.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 121,
+    "name": "Picarta",
+    "url": "https://picarta.ai/",
+    "category": "Geolocalizzazione visiva",
+    "price": "Freemium",
+    "description": "Stima geografica assistita da IA, da corroborare.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 39,
     "name": "NASA Worldview",
-    "url": "https://worldview.earthdata.nasa.gov",
-    "category": "Geolocalizzazione",
+    "url": "https://worldview.earthdata.nasa.gov/",
+    "category": "Geolocalizzazione visiva",
     "price": "Gratuito",
-    "description": "Geolocalizzazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Immagini satellitari e fenomeni ambientali.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 40,
-    "name": "Copernicus Browser",
-    "url": "https://browser.dataspace.copernicus.eu",
-    "category": "Geolocalizzazione",
-    "price": "Gratuito",
-    "description": "Geolocalizzazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 41,
-    "name": "Wayback Machine",
-    "url": "https://web.archive.org",
-    "category": "Archivi web",
-    "price": "Gratuito",
-    "description": "Archivi web · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 42,
-    "name": "ArchiveWeb.page",
-    "url": "https://archiveweb.page",
-    "category": "Archivi web",
-    "price": "Gratuito",
-    "description": "Archivi web · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 43,
-    "name": "Common Crawl",
-    "url": "https://commoncrawl.org",
-    "category": "Archivi web",
-    "price": "Gratuito",
-    "description": "Archivi web · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 44,
-    "name": "Shodan",
-    "url": "https://shodan.io",
-    "category": "Cybersecurity",
+    "id": 122,
+    "name": "Social Searcher",
+    "url": "https://www.social-searcher.com/",
+    "category": "Social OSINT",
     "price": "Freemium",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca di menzioni pubbliche.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 45,
-    "name": "Censys",
-    "url": "https://search.censys.io",
-    "category": "Cybersecurity",
-    "price": "Freemium",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "id": 123,
+    "name": "Instaloader",
+    "url": "https://instaloader.github.io/",
+    "category": "Social OSINT",
+    "price": "Gratuito",
+    "description": "Raccolta locale di contenuti accessibili secondo le regole del servizio.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 46,
-    "name": "VirusTotal",
-    "url": "https://virustotal.com",
-    "category": "Cybersecurity",
+    "id": 124,
+    "name": "TGStat",
+    "url": "https://tgstat.com/",
+    "category": "Social OSINT",
     "price": "Freemium",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 47,
-    "name": "URLScan",
-    "url": "https://urlscan.io",
-    "category": "Cybersecurity",
-    "price": "Freemium",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Statistiche e ricerca di canali pubblici Telegram.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 48,
     "name": "AbuseIPDB",
-    "url": "https://abuseipdb.com",
-    "category": "Cybersecurity",
+    "url": "https://www.abuseipdb.com/",
+    "category": "Threat Intelligence",
     "price": "Freemium",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Segnalazioni di attività associate a IP.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 46,
+    "name": "VirusTotal",
+    "url": "https://www.virustotal.com/",
+    "category": "Threat Intelligence",
+    "price": "Freemium",
+    "description": "Report su hash, domini, URL e IP.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 125,
+    "name": "Hybrid Analysis",
+    "url": "https://www.hybrid-analysis.com/",
+    "category": "Threat Intelligence",
+    "price": "Freemium",
+    "description": "Report di analisi malware.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 47,
+    "name": "URLScan",
+    "url": "https://urlscan.io/",
+    "category": "Threat Intelligence",
+    "price": "Freemium",
+    "description": "Report di osservazioni delle pagine web.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 126,
+    "name": "Lookyloo",
+    "url": "https://lookyloo.circl.lu/",
+    "category": "Threat Intelligence",
+    "price": "Gratuito",
+    "description": "Analisi delle connessioni di una pagina web, contatta il sito.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 127,
+    "name": "AlienVault OTX",
+    "url": "https://otx.alienvault.com/",
+    "category": "Threat Intelligence",
+    "price": "Gratuito",
+    "description": "Indicatori di minaccia condivisi.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 49,
     "name": "GreyNoise",
-    "url": "https://greynoise.io",
-    "category": "Cybersecurity",
+    "url": "https://www.greynoise.io/",
+    "category": "Threat Intelligence",
     "price": "Freemium",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Contesto sul traffico Internet osservato.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 50,
-    "name": "OWASP",
-    "url": "https://owasp.org",
-    "category": "Cybersecurity",
-    "price": "Gratuito",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 51,
-    "name": "MITRE ATT&CK",
-    "url": "https://attack.mitre.org",
-    "category": "Cybersecurity",
-    "price": "Gratuito",
-    "description": "Cybersecurity · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 52,
-    "name": "Autopsy",
-    "url": "https://autopsy.com",
-    "category": "Digital Forensics",
-    "price": "Gratuito",
-    "description": "Digital Forensics · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 53,
-    "name": "Volatility",
-    "url": "https://volatilityfoundation.org",
-    "category": "Digital Forensics",
-    "price": "Gratuito",
-    "description": "Digital Forensics · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 54,
-    "name": "Wireshark",
-    "url": "https://wireshark.org",
-    "category": "Digital Forensics",
-    "price": "Gratuito",
-    "description": "Digital Forensics · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 55,
-    "name": "ALEAPP",
-    "url": "https://github.com/abrignoni/ALEAPP",
-    "category": "Digital Forensics",
-    "price": "Gratuito",
-    "description": "Digital Forensics · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 56,
-    "name": "iLEAPP",
-    "url": "https://github.com/abrignoni/iLEAPP",
-    "category": "Digital Forensics",
-    "price": "Gratuito",
-    "description": "Digital Forensics · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 57,
-    "name": "DB Browser for SQLite",
-    "url": "https://sqlitebrowser.org",
-    "category": "Digital Forensics",
-    "price": "Gratuito",
-    "description": "Digital Forensics · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 58,
-    "name": "Hunchly",
-    "url": "https://hunch.ly",
-    "category": "Digital Forensics",
-    "price": "A pagamento",
-    "description": "Digital Forensics · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 59,
-    "name": "CyberChef",
-    "url": "https://gchq.github.io/CyberChef/",
-    "category": "Utility e analisi",
-    "price": "Gratuito",
-    "description": "Utility e analisi · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 60,
-    "name": "Gephi",
-    "url": "https://gephi.org",
-    "category": "Utility e analisi",
-    "price": "Gratuito",
-    "description": "Utility e analisi · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 61,
-    "name": "Maltego",
-    "url": "https://maltego.com",
-    "category": "Utility e analisi",
+    "id": 44,
+    "name": "Shodan",
+    "url": "https://www.shodan.io/",
+    "category": "Threat Intelligence",
     "price": "Freemium",
-    "description": "Utility e analisi · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca di servizi Internet indicizzati.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 62,
-    "name": "Inkscape",
-    "url": "https://inkscape.org",
-    "category": "Utility e analisi",
+    "id": 45,
+    "name": "Censys",
+    "url": "https://search.censys.io/",
+    "category": "Threat Intelligence",
+    "price": "Freemium",
+    "description": "Osservazioni su host e certificati.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 128,
+    "name": "SSL Labs",
+    "url": "https://www.ssllabs.com/ssltest/",
+    "category": "Threat Intelligence",
     "price": "Gratuito",
-    "description": "Utility e analisi · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Valutazione TLS di sistemi autorizzati, genera traffico.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 63,
-    "name": "7-Zip",
-    "url": "https://7-zip.org",
-    "category": "Utility e analisi",
+    "id": 129,
+    "name": "CVE",
+    "url": "https://www.cve.org/",
+    "category": "Vulnerabilità",
     "price": "Gratuito",
-    "description": "Utility e analisi · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Catalogo identificativi di vulnerabilità.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 64,
-    "name": "Flightradar24",
-    "url": "https://flightradar24.com",
-    "category": "Traffico aereo",
-    "price": "Freemium",
-    "description": "Traffico aereo · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 65,
-    "name": "FlightAware",
-    "url": "https://flightaware.com",
-    "category": "Traffico aereo",
-    "price": "Freemium",
-    "description": "Traffico aereo · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 66,
-    "name": "ADS-B Exchange",
-    "url": "https://adsbexchange.com",
-    "category": "Traffico aereo",
-    "price": "Freemium",
-    "description": "Traffico aereo · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 67,
-    "name": "MarineTraffic",
-    "url": "https://marinetraffic.com",
-    "category": "Traffico navale",
-    "price": "Freemium",
-    "description": "Traffico navale · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 68,
-    "name": "VesselFinder",
-    "url": "https://vesselfinder.com",
-    "category": "Traffico navale",
-    "price": "Freemium",
-    "description": "Traffico navale · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 69,
-    "name": "Equasis",
-    "url": "https://equasis.org",
-    "category": "Traffico navale",
+    "id": 130,
+    "name": "NVD",
+    "url": "https://nvd.nist.gov/",
+    "category": "Vulnerabilità",
     "price": "Gratuito",
-    "description": "Traffico navale · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Informazioni e metriche sulle vulnerabilità.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 33,
+    "name": "Have I Been Pwned",
+    "url": "https://haveibeenpwned.com/",
+    "category": "Data breach",
+    "price": "Freemium",
+    "description": "Verifica presenza di email in violazioni note.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 41,
+    "name": "Wayback Machine",
+    "url": "https://web.archive.org/",
+    "category": "Archivi web",
+    "price": "Gratuito",
+    "description": "Consultazione di catture storiche.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 42,
+    "name": "ArchiveWeb.page",
+    "url": "https://archiveweb.page/",
+    "category": "Archivi web",
+    "price": "Gratuito",
+    "description": "Acquisizione locale di pagine web.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 43,
+    "name": "Common Crawl",
+    "url": "https://commoncrawl.org/",
+    "category": "Archivi web",
+    "price": "Gratuito",
+    "description": "Archivi di raccolte web pubbliche.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 70,
     "name": "Registro Imprese",
-    "url": "https://registroimprese.it",
+    "url": "https://www.registroimprese.it/",
     "category": "Aziende e registri",
     "price": "Freemium",
-    "description": "Aziende e registri · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Informazioni e documenti camerali.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 131,
+    "name": "Telemaco",
+    "url": "https://www.registroimprese.it/telemaco",
+    "category": "Aziende e registri",
+    "price": "Freemium",
+    "description": "Accesso a documenti del Registro Imprese.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 71,
@@ -635,286 +665,238 @@
     "url": "https://ec.europa.eu/taxation_customs/vies/",
     "category": "Aziende e registri",
     "price": "Gratuito",
-    "description": "Aziende e registri · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Controllo validità partita IVA europea.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 72,
     "name": "INI-PEC",
-    "url": "https://inipec.gov.it",
+    "url": "https://www.inipec.gov.it/",
     "category": "Aziende e registri",
     "price": "Gratuito",
-    "description": "Aziende e registri · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Indice pubblico PEC di imprese e professionisti.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 73,
     "name": "OpenCorporates",
-    "url": "https://opencorporates.com",
+    "url": "https://opencorporates.com/",
     "category": "Aziende e registri",
     "price": "Freemium",
-    "description": "Aziende e registri · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca di società in diverse giurisdizioni.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 74,
     "name": "GLEIF",
-    "url": "https://gleif.org",
+    "url": "https://www.gleif.org/",
     "category": "Aziende e registri",
     "price": "Gratuito",
-    "description": "Aziende e registri · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Dati identificativi LEI.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 75,
-    "name": "Proton VPN",
-    "url": "https://protonvpn.com",
-    "category": "VPN e privacy",
-    "price": "Freemium",
-    "description": "VPN e privacy · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 76,
-    "name": "Windscribe",
-    "url": "https://windscribe.com",
-    "category": "VPN e privacy",
-    "price": "Freemium",
-    "description": "VPN e privacy · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 77,
-    "name": "WireGuard",
-    "url": "https://wireguard.com",
-    "category": "VPN e privacy",
+    "id": 132,
+    "name": "WIPO Global Brand Database",
+    "url": "https://branddb.wipo.int/",
+    "category": "Aziende e registri",
     "price": "Gratuito",
-    "description": "VPN e privacy · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Ricerca internazionale di marchi.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 78,
-    "name": "Tailscale",
-    "url": "https://tailscale.com",
-    "category": "VPN e privacy",
-    "price": "Freemium",
-    "description": "VPN e privacy · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 79,
-    "name": "Tor Browser",
-    "url": "https://torproject.org",
-    "category": "VPN e privacy",
+    "id": 133,
+    "name": "TMview",
+    "url": "https://www.tmdn.org/tmview/",
+    "category": "Aziende e registri",
     "price": "Gratuito",
-    "description": "VPN e privacy · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Consultazione dei marchi registrati.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 80,
-    "name": "Mullvad",
-    "url": "https://mullvad.net",
-    "category": "VPN e privacy",
+    "id": 61,
+    "name": "Maltego",
+    "url": "https://www.maltego.com/",
+    "category": "Automazione e correlazione",
+    "price": "Freemium",
+    "description": "Analisi grafica delle relazioni.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 60,
+    "name": "Gephi",
+    "url": "https://gephi.org/",
+    "category": "Automazione e correlazione",
+    "price": "Gratuito",
+    "description": "Visualizzazione di reti e grafi.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 59,
+    "name": "CyberChef",
+    "url": "https://gchq.github.io/CyberChef/",
+    "category": "Automazione e correlazione",
+    "price": "Gratuito",
+    "description": "Conversione e trasformazione di dati.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 134,
+    "name": "SpiderFoot",
+    "url": "https://github.com/smicallef/spiderfoot",
+    "category": "Automazione e correlazione",
+    "price": "Gratuito",
+    "description": "Raccolta modulare, alcune fonti richiedono API.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 135,
+    "name": "theHarvester",
+    "url": "https://github.com/laramies/theHarvester",
+    "category": "Automazione e correlazione",
+    "price": "Gratuito",
+    "description": "Raccolta di indicatori pubblici di domini autorizzati.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 136,
+    "name": "Recon-ng",
+    "url": "https://github.com/lanmaster53/recon-ng",
+    "category": "Automazione e correlazione",
+    "price": "Gratuito",
+    "description": "Framework modulare di ricognizione.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
+  },
+  {
+    "id": 58,
+    "name": "Hunchly",
+    "url": "https://www.hunch.ly/",
+    "category": "Documentazione",
     "price": "A pagamento",
-    "description": "VPN e privacy · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Documentazione delle sessioni di ricerca web.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 81,
-    "name": "VirtualBox",
-    "url": "https://virtualbox.org",
-    "category": "Macchine virtuali",
+    "id": 137,
+    "name": "Google Ricerca avanzata",
+    "url": "https://www.google.com/advanced_search",
+    "category": "Ricerca avanzata e directory",
     "price": "Gratuito",
-    "description": "Macchine virtuali · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 82,
-    "name": "Proxmox VE",
-    "url": "https://proxmox.com",
-    "category": "Macchine virtuali",
-    "price": "Freemium",
-    "description": "Macchine virtuali · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 83,
-    "name": "Kali Linux",
-    "url": "https://kali.org",
-    "category": "Macchine virtuali",
-    "price": "Gratuito",
-    "description": "Macchine virtuali · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 84,
-    "name": "REMnux",
-    "url": "https://remnux.org",
-    "category": "Macchine virtuali",
-    "price": "Gratuito",
-    "description": "Macchine virtuali · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 85,
-    "name": "QEMU",
-    "url": "https://qemu.org",
-    "category": "Macchine virtuali",
-    "price": "Gratuito",
-    "description": "Macchine virtuali · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 86,
-    "name": "Docker",
-    "url": "https://docker.com",
-    "category": "Macchine virtuali",
-    "price": "Freemium",
-    "description": "Macchine virtuali · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 87,
-    "name": "GitHub Pages",
-    "url": "https://pages.github.com",
-    "category": "Hosting sicuro",
-    "price": "Gratuito",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 88,
-    "name": "Supabase",
-    "url": "https://supabase.com",
-    "category": "Hosting sicuro",
-    "price": "Freemium",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 89,
-    "name": "Cloudflare",
-    "url": "https://cloudflare.com",
-    "category": "Hosting sicuro",
-    "price": "Freemium",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 90,
-    "name": "Nginx",
-    "url": "https://nginx.org",
-    "category": "Hosting sicuro",
-    "price": "Gratuito",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 91,
-    "name": "Caddy",
-    "url": "https://caddyserver.com",
-    "category": "Hosting sicuro",
-    "price": "Gratuito",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 92,
-    "name": "Let’s Encrypt",
-    "url": "https://letsencrypt.org",
-    "category": "Hosting sicuro",
-    "price": "Gratuito",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 93,
-    "name": "Portainer",
-    "url": "https://portainer.io",
-    "category": "Hosting sicuro",
-    "price": "Freemium",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 94,
-    "name": "CasaOS",
-    "url": "https://casaos.io",
-    "category": "Hosting sicuro",
-    "price": "Gratuito",
-    "description": "Hosting sicuro · Risorsa ufficiale candidata",
-    "status": "Da verificare"
-  },
-  {
-    "id": 95,
-    "name": "Bellingcat",
-    "url": "https://bellingcat.com",
-    "category": "Guide e formazione",
-    "price": "Gratuito",
-    "description": "Guide e formazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Filtri per documenti e contenuti pubblici.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
     "id": 96,
     "name": "OSINT Framework",
-    "url": "https://osintframework.com",
-    "category": "Guide e formazione",
+    "url": "https://osintframework.com/",
+    "category": "Ricerca avanzata e directory",
     "price": "Gratuito",
-    "description": "Guide e formazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Directory di strumenti per tipologia di dato.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 97,
-    "name": "PortSwigger Academy",
-    "url": "https://portswigger.net/web-security",
-    "category": "Guide e formazione",
+    "id": 138,
+    "name": "Bellingcat Toolkit",
+    "url": "https://bellingcat.gitbook.io/toolkit",
+    "category": "Ricerca avanzata e directory",
     "price": "Gratuito",
-    "description": "Guide e formazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Catalogo di risorse di ricerca aperta.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "osint"
   },
   {
-    "id": 98,
-    "name": "NIST",
-    "url": "https://nist.gov",
-    "category": "Guide e formazione",
-    "price": "Gratuito",
-    "description": "Guide e formazione · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "id": 75,
+    "name": "Proton VPN",
+    "url": "https://protonvpn.com/",
+    "category": "Sicurezza operativa",
+    "price": "Freemium",
+    "description": "VPN con piano di accesso gratuito.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
   },
   {
-    "id": 99,
-    "name": "Normattiva",
-    "url": "https://normattiva.it",
-    "category": "Legalità e normativa",
-    "price": "Gratuito",
-    "description": "Legalità e normativa · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "id": 80,
+    "name": "Mullvad",
+    "url": "https://mullvad.net/",
+    "category": "Sicurezza operativa",
+    "price": "A pagamento",
+    "description": "VPN commerciale.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
   },
   {
-    "id": 100,
-    "name": "EUR-Lex",
-    "url": "https://eur-lex.europa.eu",
-    "category": "Legalità e normativa",
+    "id": 79,
+    "name": "Tor Browser",
+    "url": "https://www.torproject.org/",
+    "category": "Sicurezza operativa",
     "price": "Gratuito",
-    "description": "Legalità e normativa · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Browser orientato alla privacy.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
   },
   {
-    "id": 101,
-    "name": "Garante Privacy",
-    "url": "https://garanteprivacy.it",
-    "category": "Legalità e normativa",
+    "id": 139,
+    "name": "BrowserLeaks",
+    "url": "https://browserleaks.com/",
+    "category": "Sicurezza operativa",
     "price": "Gratuito",
-    "description": "Legalità e normativa · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Verifica delle informazioni esposte dal browser.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
   },
   {
-    "id": 102,
-    "name": "Gazzetta Ufficiale",
-    "url": "https://gazzettaufficiale.it",
-    "category": "Legalità e normativa",
+    "id": 140,
+    "name": "DNSLeakTest",
+    "url": "https://dnsleaktest.com/",
+    "category": "Sicurezza operativa",
     "price": "Gratuito",
-    "description": "Legalità e normativa · Risorsa ufficiale candidata",
-    "status": "Da verificare"
+    "description": "Controllo dei resolver DNS osservati.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
+  },
+  {
+    "id": 141,
+    "name": "Cover Your Tracks",
+    "url": "https://coveryourtracks.eff.org/",
+    "category": "Sicurezza operativa",
+    "price": "Gratuito",
+    "description": "Valutazione della tracciabilità del browser.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
+  },
+  {
+    "id": 81,
+    "name": "VirtualBox",
+    "url": "https://www.virtualbox.org/",
+    "category": "Sicurezza operativa",
+    "price": "Gratuito",
+    "description": "Virtualizzazione locale.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
+  },
+  {
+    "id": 142,
+    "name": "KeePassXC",
+    "url": "https://keepassxc.org/",
+    "category": "Sicurezza operativa",
+    "price": "Gratuito",
+    "description": "Gestione locale delle credenziali.",
+    "status": "Accesso e condizioni da verificare",
+    "section": "supporto"
   }
 ]
