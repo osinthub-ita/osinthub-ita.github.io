@@ -1,21 +1,36 @@
 {
-  "IP, ISP e ASN": "Individua reti, assegnazioni e operatori Internet. Non identifica l’abbonato.",
-  "Geolocalizzazione IP": "Confronta stime geografiche, non posizioni fisiche certe.",
-  "Domini e DNS": "Consulta registrazioni, certificati e record DNS.",
-  "Username": "Individua account candidati, senza attribuire automaticamente identità.",
-  "Email": "Verifica contatti pubblici, domini e configurazioni della posta.",
-  "Numeri telefonici": "Consulta prefissi, piani di numerazione e contatti pubblici di attività.",
-  "Immagini inverse": "Cerca copie, somiglianze e pubblicazioni precedenti, senza identificazione biometrica.",
-  "Analisi foto e video": "Esamina metadati, fotogrammi e indizi di modifica.",
-  "Geolocalizzazione visiva": "Confronta elementi geografici e ambientali con fonti cartografiche.",
-  "Social OSINT": "Consulta contenuti pubblici e analizza tendenze, nel rispetto delle condizioni di accesso.",
-  "Threat Intelligence": "Consulta reputazione e osservazioni di sicurezza già disponibili.",
-  "Vulnerabilità": "Consulta identificativi e descrizioni delle vulnerabilità pubbliche.",
-  "Data breach": "Verifica esposizioni dei propri dati o di risorse autorizzate, senza consultare password altrui.",
-  "Archivi web": "Consulta e documenta versioni storiche di contenuti pubblici.",
-  "Aziende e registri": "Consulta dati societari, fiscali e marchi presso fonti pubbliche.",
-  "Automazione e correlazione": "Organizza e correla informazioni, controllando moduli e autorizzazioni.",
-  "Documentazione": "Registra fonti e acquisizioni con riferimenti temporali.",
-  "Ricerca avanzata e directory": "Punti di partenza per query mirate e strumenti specialistici.",
-  "Sicurezza operativa": "Risorse complementari per proteggere l’ambiente di lavoro, senza garanzie di anonimato."
+  "Ricerca e identificativi": [
+    "Username",
+    "Email",
+    "Numeri telefonici",
+    "Social OSINT",
+    "Data breach",
+    "Aziende e registri",
+    "Ricerca avanzata e directory"
+  ],
+  "IP, domini e sicurezza informatica": [
+    "IP, ISP e ASN",
+    "Geolocalizzazione IP",
+    "Domini e DNS",
+    "Threat Intelligence",
+    "Vulnerabilità"
+  ],
+  "GEOINT e IMINT": [
+    "Immagini inverse",
+    "Analisi foto e video",
+    "Geolocalizzazione visiva",
+    "Traffico aereo e navale"
+  ],
+  "Analisi e documentazione": [
+    "Archivi web",
+    "Automazione e correlazione",
+    "Documentazione"
+  ],
+  "OPSEC e sicurezza operativa": [
+    "VPN e proxy",
+    "Privacy del browser",
+    "Verifica connessione",
+    "Macchine virtuali",
+    "Protezione operativa"
+  ]
 }
