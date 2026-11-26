@@ -36,3 +36,23 @@ header .login-link{margin-left:auto;background:#146078;color:white;border:1px so
 .btn-link{background:none!important;border:none!important;color:var(--cyan)!important;text-decoration:underline;padding:6px!important;font-size:14px}
 .auth-status{font-size:14px;font-weight:600;min-height:20px}
 .auth-footer{margin-top:18px;font-size:13px;text-align:center}
+
+/* Clean hero banner without overlaid text */
+.home .hero.hero-clean{padding:0!important;min-height:0!important;max-height:none!important;background:#050b13!important;border:1px solid #225065;border-radius:18px;overflow:hidden;display:block!important}
+.home .hero.hero-clean:after{display:none!important}
+.hero-banner-img{display:block;width:100%;max-height:360px;object-fit:cover;object-position:center}
+
+/* Hacker Terminal Boot Overlay */
+.hacker-terminal{position:fixed;inset:0;z-index:9999;background:rgba(3,8,14,0.96);display:grid;place-items:center;padding:20px;cursor:pointer;transition:opacity .3s ease}
+.hacker-terminal[hidden]{display:none!important}
+.hacker-terminal.fade-out{opacity:0}
+.terminal-window{width:100%;max-width:680px;background:#040a0f;border:1px solid #00ffcc;border-radius:10px;box-shadow:0 0 30px rgba(0,255,204,0.2);overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+.terminal-header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#091822;border-bottom:1px solid #183b4d}
+.terminal-header .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+.terminal-header .dot.red{background:#ef4444}
+.terminal-header .dot.amber{background:#f59e0b}
+.terminal-header .dot.green{background:#22c55e}
+.terminal-title{margin-left:8px;font-size:12px;color:#8ce7f5;letter-spacing:.08em}
+.terminal-body{margin:0;padding:18px;min-height:220px;color:#00ffcc;font-size:13px;line-height:1.65;white-space:pre-wrap;overflow-x:auto}
+.terminal-footer{padding:10px 14px;background:#07131c;border-top:1px solid #183b4d;text-align:center;font-size:12px;color:#55e8f5;letter-spacing:.1em;animation:pulseTerm 1.5s infinite}
+@keyframes pulseTerm{0%,100%{opacity:1}50%{opacity:.45}}

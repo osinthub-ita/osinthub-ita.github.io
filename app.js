@@ -23,11 +23,54 @@ function syncUserNav(){
 }
 syncUserNav();
 
+function startHackerTerminal(){
+  const overlay = $('hackerTerminal');
+  const out = $('terminalOutput');
+  if(!overlay || !out) return;
+  overlay.hidden = false;
+  out.textContent = '';
+
+  const lines = [
+    '[INIT] Avvio sessione ospite OSINTHUB-ITA v3.2...',
+    '[NET]  Handshake TLS 1.3 con nodo edge Cloudflare... OK',
+    '[SCAN] Scansione pacchetti in ingresso: 0x4F 0x53 0x49 0x4E 0x54',
+    '[DNS]  Verifica resolver e protezione leak... ATTIVO',
+    '[GEO]  Interrogazione modulo telemetria IP/ASN... COMPLETATA',
+    '[DB]   Caricamento 107 strumenti su 5 macroaree OSINT... PRONTO',
+    '[SYS]  Accesso autorizzato in modalità OSPITE.',
+    '>> Clicca con il mouse ovunque per entrare nel portale...'
+  ];
+
+  let idx = 0;
+  let timer = setInterval(() => {
+    if(idx < lines.length){
+      out.textContent += lines[idx] + '
+';
+      idx++;
+    } else {
+      clearInterval(timer);
+    }
+  }, 260);
+
+  const closeTerminal = () => {
+    clearInterval(timer);
+    overlay.classList.add('fade-out');
+    setTimeout(() => {
+      overlay.hidden = true;
+      overlay.classList.remove('fade-out');
+    }, 300);
+    overlay.removeEventListener('click', closeTerminal);
+  };
+
+  overlay.addEventListener('click', closeTerminal);
+}
+
 try{
   if(!localStorage.getItem('legalSeen')) $('welcome').showModal();
 }catch{
   $('welcome').showModal();
 }
+
 if($('acceptGuest')){
   $('acceptGuest').onclick=()=>{
     try{
@@ -38,5 +81,6 @@ if($('acceptGuest')){
       syncUserNav();
     }catch{}
     $('welcome').close();
+    startHackerTerminal();
   };
 }
