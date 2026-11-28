@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 const $=id=>document.getElementById(id), el=(tag,text='')=>{const n=document.createElement(tag);n.textContent=text;return n};
 
 const CONSENT_KEY = 'osinthub_cookie_consent_v1';
@@ -9,13 +9,7 @@ function getConsent(){
 }
 
 function saveConsent(prefs){
-  const record = {
-    necessary: true,
-    functional: !!prefs.functional,
-    networkDiag: !!prefs.networkDiag,
-    timestamp: new Date().toISOString(),
-    version: '1.0-IT-EU-US'
-  };
+  const record = { necessary: true, functional: !!prefs.functional, networkDiag: !!prefs.networkDiag, timestamp: new Date().toISOString(), version: '1.0-IT-EU-US' };
   try{
     localStorage.setItem(CONSENT_KEY, JSON.stringify(record));
     document.cookie = 'osinthub_consent=' + encodeURIComponent(JSON.stringify({f:record.functional?1:0,n:record.networkDiag?1:0})) + '; max-age=' + (180*86400) + '; path=/; SameSite=Lax; Secure';
@@ -34,9 +28,7 @@ function initCookieBanner(){
   const optNet = $('optNetworkDiag');
 
   const existing = getConsent();
-  if(!existing){
-    banner.hidden = false;
-  } else {
+  if(!existing){ banner.hidden = false; } else {
     if(optFunc) optFunc.checked = !!existing.functional;
     if(optNet) optNet.checked = !!existing.networkDiag;
   }
@@ -82,9 +74,7 @@ function syncUserNav(){
       nav.textContent = 'Accedi / Ospite';
       nav.href = 'login.html';
     }
-  }catch{
-    nav.textContent = 'Accedi / Ospite';
-  }
+  }catch{ nav.textContent = 'Accedi / Ospite'; }
 }
 
 function startMatrixRain(canvas){
@@ -124,7 +114,6 @@ function startMatrixRain(canvas){
 function runBootSequence(){
   const overlay = $('hackerTerminal');
   const out = $('terminalOutput');
-  const welcomeModal = $('welcome');
   const canvas = $('matrixCanvas');
   if(!overlay || !out) return;
 
@@ -133,24 +122,15 @@ function runBootSequence(){
   out.textContent = '';
 
   const stopMatrix = startMatrixRain(canvas);
-  const urlParams = new URLSearchParams(window.location.search);
-  const justLoggedIn = urlParams.get('logged') === '1';
 
-  const lines = justLoggedIn ? [
-    'root@osinthub-ita:~# verify --session-token --tls1.3',
-    '[OK] Handshake crittografico TLS 1.3 stabilito (AES-256-GCM)',
-    '[OK] Nodo Edge Cloudflare attivo · Protezione anti-leak DNS',
-    '[OK] Profilo utente e preferenze sincronizzati',
-    '[████████████████████] 100% — SESSIONE AUTENTICATA ATTIVA',
-    '> Accesso autorizzato. Clicca ovunque sullo schermo per entrare...'
-  ] : [
+  const lines = [
     'root@osinthub-ita:~# ./init_osint_kernel.sh --stealth',
     '[0.04s] Montaggio filesystem cifrato in memoria... [OK]',
     '[0.12s] Handshake TLS 1.3 con Cloudflare Edge Worker... [OK]',
     '[0.21s] Scansione socket & rilevamento proxy/VPN... [ATTIVO]',
     '[0.34s] Caricamento indici OSINT, Dorking, SOCMINT... [OK]',
     '[████████████████████] 100% — SISTEMA PRONTO',
-    '> Clicca ovunque per selezionare la modalità di accesso...'
+    '> Clicca ovunque per accedere al portale...'
   ];
 
   let lineIdx = 0, charIdx = 0, currentBuffer = '', stopped = false;
@@ -179,18 +159,11 @@ function runBootSequence(){
   const closeTerminal = () => {
     if(closed) return;
     closed = true; stopped = true; stopMatrix();
-    try{ sessionStorage.setItem('osinthub_boot_shown', '1'); }catch{}
     overlay.classList.add('fade-out');
     setTimeout(() => {
       overlay.style.display = 'none';
       overlay.hidden = true;
       overlay.classList.remove('fade-out');
-
-      if(justLoggedIn){
-        window.history.replaceState({}, document.title, 'index.html');
-        return;
-      }
-      if(welcomeModal) welcomeModal.style.display = 'grid';
     }, 280);
   };
 
@@ -295,38 +268,41 @@ $('toggleSearch')?.addEventListener('click', ()=>{
 });
 $('search')?.addEventListener('input', render);
 
-$('acceptGuest')?.addEventListener('click', () => {
-  try{
-    localStorage.setItem('osinthub_user', JSON.stringify({ name: 'Ospite', guest: true }));
-    localStorage.setItem(ACCESS_KEY, 'guest');
-    localStorage.setItem('legalSeen', '1');
-    sessionStorage.setItem('osinthub_boot_shown', '1');
-  }catch{}
-  syncUserNav();
+document.addEventListener('DOMContentLoaded', () => {
   const welcomeModal = $('welcome');
-  if(welcomeModal) welcomeModal.style.display = 'none';
-});
+  const acceptGuestBtn = $('acceptGuest');
 
-$('switchAccessMode')?.addEventListener('click', () => {
-  const welcomeModal = $('welcome');
-  if(welcomeModal) welcomeModal.style.display = 'grid';
+  const urlParams = new URLSearchParams(window.location.search);
+  const justLoggedIn = urlParams.get('logged') === '1';
+  let activeUser = null;
+  try{ activeUser = JSON.parse(localStorage.getItem('osinthub_user') || 'null'); }catch{}
+
+  if (justLoggedIn) {
+    if(welcomeModal) welcomeModal.style.display = 'none';
+    runBootSequence();
+    window.history.replaceState({}, document.title, 'index.html');
+  } else if (activeUser && !activeUser.guest) {
+    // Real logged in user, skip modal
+    if(welcomeModal) welcomeModal.style.display = 'none';
+  } else {
+    // Show welcome modal on every fresh session / open / guest visit so user always sees it
+    if(welcomeModal) welcomeModal.style.display = 'flex';
+  }
+
+  acceptGuestBtn?.addEventListener('click', () => {
+    try{
+      localStorage.setItem('osinthub_user', JSON.stringify({ name: 'Ospite', guest: true }));
+      localStorage.setItem(ACCESS_KEY, 'guest');
+    }catch{}
+    syncUserNav();
+    if(welcomeModal) welcomeModal.style.display = 'none';
+    runBootSequence();
+  });
+
+  $('switchAccessMode')?.addEventListener('click', () => {
+    if(welcomeModal) welcomeModal.style.display = 'flex';
+  });
 });
 
 syncUserNav();
 initCookieBanner();
-
-(function initEntryFlow(){
-  const urlParams = new URLSearchParams(window.location.search);
-  const justLoggedIn = urlParams.get('logged') === '1';
-  let bootShown = null;
-  try{ bootShown = sessionStorage.getItem('osinthub_boot_shown'); }catch{}
-
-  if(justLoggedIn || !bootShown){
-    runBootSequence();
-  } else {
-    const overlay = $('hackerTerminal');
-    const welcomeModal = $('welcome');
-    if(overlay){ overlay.style.display = 'none'; overlay.hidden = true; }
-    if(welcomeModal){ welcomeModal.style.display = 'none'; }
-  }
-})();
