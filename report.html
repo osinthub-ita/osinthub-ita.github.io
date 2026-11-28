@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Segnala o Suggerisci | OSINTHUB-ITA</title>
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=5.0">
 </head>
 <body>
   <header>
@@ -30,7 +30,22 @@
     if(p.get('url')) document.getElementById('rUrl').value = p.get('url');
     document.getElementById('repForm').onsubmit = (e) => {
       e.preventDefault();
-      document.getElementById('repStatus').textContent = 'Segnalazione registrata correttamente. Grazie per il contributo!';
+      let author = 'Ospite';
+      try{
+        const u = JSON.parse(localStorage.getItem('osinthub_user') || 'null');
+        if(u && u.email) author = u.email;
+      }catch{}
+      const reports = JSON.parse(localStorage.getItem('osinthub_reports') || '[]');
+      reports.unshift({
+        name: document.getElementById('rName').value.trim(),
+        url: document.getElementById('rUrl').value.trim(),
+        note: document.getElementById('rNote').value.trim(),
+        author,
+        status: 'In revisione',
+        date: new Date().toISOString()
+      });
+      localStorage.setItem('osinthub_reports', JSON.stringify(reports));
+      document.getElementById('repStatus').textContent = 'Segnalazione registrata correttamente! Puoi seguirla nella tua Area Utente.';
       e.target.reset();
     };
   </script>

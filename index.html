@@ -4,11 +4,11 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   <title>OSINTHUB-ITA</title>
-  <link href="style.css?v=4.1" rel="stylesheet"/>
+  <link href="style.css?v=5.0" rel="stylesheet"/>
 </head>
 <body class="home">
-  <!-- Sequenza Terminale Hacker Fosforo Verde & Matrix Rain all'apertura -->
-  <div id="hackerTerminal" class="hacker-terminal" aria-live="polite">
+  <!-- Sequenza Terminale Hacker Fosforo Verde & Matrix Rain -->
+  <div id="hackerTerminal" class="hacker-terminal" style="display:none" aria-live="polite">
     <canvas id="matrixCanvas" class="matrix-canvas" aria-hidden="true"></canvas>
     <div class="crt-scanlines" aria-hidden="true"></div>
     <div class="terminal-window" onclick="event.stopPropagation()">
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <!-- Overlay Scelta Accesso (Ospite / Accedi / Registrati) subito dopo il terminale -->
+  <!-- Overlay Scelta Accesso (Ospite / Accedi / Registrati) -->
   <div id="welcome" class="welcome-overlay" style="display:none">
     <div class="welcome-modal-card" onclick="event.stopPropagation()">
       <div class="gate-badge">ACCESSO PORTALE · OSINTHUB-ITA</div>
@@ -130,6 +130,8 @@
       <button class="link-btn" id="openCookiePrefs" type="button">Gestisci preferenze cookie</button>
       <span aria-hidden="true"> · </span>
       <button class="link-btn" id="switchAccessMode" type="button">Cambia modalità accesso</button>
+      <span aria-hidden="true"> · </span>
+      <a href="admin.html">Area Admin</a>
     </div>
     <p>Progetto indipendente, non istituzionale.</p>
   </footer>
@@ -151,7 +153,7 @@
         </label>
         <label class="cookie-opt">
           <input id="optFunctional" type="checkbox"/>
-          <span><strong>Funzionali e preferenze interfaccia</strong> — Memorizzano filtri e impostazioni locali sul dispositivo.</span>
+          <span><strong>Funzionali e preferenze interfaccia</strong> — Memorizzano filtri, preferiti e impostazioni locali sul dispositivo.</span>
         </label>
         <label class="cookie-opt">
           <input id="optNetworkDiag" type="checkbox" checked=""/>
@@ -167,7 +169,7 @@
     </div>
   </aside>
 
-  <script src="app.js?v=4.1"></script>
-  <script src="intelligence.js?v=4.1"></script>
+  <script src="app.js?v=5.0"></script>
+  <script src="intelligence.js?v=5.0"></script>
 </body>
 </html>

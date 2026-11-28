@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Area Personale Utente | OSINTHUB-ITA</title>
+  <link rel="stylesheet" href="style.css?v=5.0">
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">OSINTHUB<span>-</span><i>I</i>T<b>A</b></a>
+    <nav>
+      <a href="index.html">← Torna al Catalogo</a>
+      <a href="admin.html" id="navAdminLink" hidden>🛡️ Pannello Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intel-panel">
+      <div class="catalog-head">
+        <div>
+          <span class="gate-badge">AREA UTENTE REGISTRATO</span>
+          <h1 id="uWelcomeTitle" style="margin:6px 0">Profilo Operatore</h1>
+          <p id="uEmailInfo" style="margin:0"></p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a href="admin.html" class="action" id="btnOpenAdmin" hidden>Apri Pannello Admin</a>
+          <button type="button" class="btn-cookie-reject" id="uLogoutBtn">Disconnetti</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="user-grid">
+      <section class="intel-panel">
+        <h2>⭐ Strumenti OSINT Salvati (<span id="favCount">0</span>)</h2>
+        <p>Puoi salvare qualsiasi strumento cliccando su <strong>☆ Salva</strong> nelle schede del catalogo.</p>
+        <div id="uFavoritesList"></div>
+      </section>
+
+      <section class="intel-panel">
+        <h2>📝 Note Operative Personali</h2>
+        <p>I tuoi appunti privati (dork, indicatori, promemoria) salvati in locale sul tuo dispositivo.</p>
+        <textarea id="uNotesArea" rows="6" style="width:100%" placeholder="Scrivi qui le tue note OSINT..."></textarea>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:12px">
+          <button type="button" class="action" id="uSaveNotesBtn">Salva Note</button>
+          <span id="uNotesStatus" class="green"></span>
+        </div>
+      </section>
+    </div>
+
+    <section class="intel-panel">
+      <h2>📨 Le tue Segnalazioni / Risorse Suggerite</h2>
+      <div id="uReportsList"></div>
+    </section>
+  </main>
+
+  <script>
+  'use strict';
+  const $ = id => document.getElementById(id);
+
+  let user = null;
+  try{ user = JSON.parse(localStorage.getItem('osinthub_user') || 'null'); }catch{}
+
+  if(!user || user.guest){
+    location.href = 'login.html';
+  } else {
+    $('uWelcomeTitle').textContent = 'Benvenuto, ' + (user.name || 'Operatore');
+    $('uEmailInfo').textContent = 'Account: ' + (user.email || 'Locale') + ' · Ruolo: ' + (user.role === 'admin' ? 'Amministratore' : 'Utente Standard');
+    if(user.role === 'admin'){
+      $('navAdminLink').hidden = false;
+      $('btnOpenAdmin').hidden = false;
+    }
+  }
+
+  // Preferiti
+  async function loadUserFavorites(){
+    const favNames = JSON.parse(localStorage.getItem('osinthub_favorites') || '[]');
+    $('favCount').textContent = favNames.length;
+    const box = $('uFavoritesList');
+    if(!favNames.length){
+      box.innerHTML = '<p>Nessuno strumento salvato nei preferiti. Vai al <a href="index.html">catalogo</a> per aggiungerli.</p>';
+      return;
+    }
+    let catalog = [];
+    try{
+      const r = await fetch('resources.json?v=' + Date.now());
+      if(r.ok) catalog = await r.json();
+    }catch{}
+    box.replaceChildren();
+    favNames.forEach(name => {
+      const item = catalog.find(t => t.name === name) || { name, url: 'index.html', category: 'Catalogo' };
+      const row = document.createElement('div');
+      row.className = 'admin-row';
+      row.innerHTML = `<div><strong>${item.name}</strong><br><small>${item.category}</small></div>
+        <div style="display:flex;gap:8px">
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-secondary">Apri ↗</a>
+          <button type="button" class="btn-cookie-reject" onclick="removeFav('${item.name.replace(/'/g,"\'")}')">Rimuovi</button>
+        </div>`;
+      box.append(row);
+    });
+  }
+
+  window.removeFav = (name) => {
+    const favs = JSON.parse(localStorage.getItem('osinthub_favorites') || '[]').filter(n => n !== name);
+    localStorage.setItem('osinthub_favorites', JSON.stringify(favs));
+    loadUserFavorites();
+  };
+  loadUserFavorites();
+
+  // Note personali
+  const notesKey = 'osinthub_notes_' + (user?.email || 'default');
+  $('uNotesArea').value = localStorage.getItem(notesKey) || '';
+  $('uSaveNotesBtn').onclick = () => {
+    localStorage.setItem(notesKey, $('uNotesArea').value);
+    $('uNotesStatus').textContent = 'Note salvate!';
+    setTimeout(() => { $('uNotesStatus').textContent = ''; }, 2500);
+  };
+
+  // Segnalazioni inviate
+  const reports = JSON.parse(localStorage.getItem('osinthub_reports') || '[]').filter(r => !user?.email || r.author === user.email || r.author === 'Ospite');
+  const repBox = $('uReportsList');
+  if(!reports.length){
+    repBox.innerHTML = '<p>Non hai ancora inviato segnalazioni o suggerimenti. <a href="report.html">Invia una proposta</a>.</p>';
+  } else {
+    reports.forEach(r => {
+      const div = document.createElement('div');
+      div.className = 'admin-row';
+      div.innerHTML = `<div><strong>${r.name}</strong> (<a href="${r.url}" target="_blank">${r.url}</a>)<br><small>${r.note}</small></div><span class="tag amber">${r.status || 'In revisione'}</span>`;
+      repBox.append(div);
+    });
+  }
+
+  $('uLogoutBtn').onclick = () => {
+    localStorage.removeItem('osinthub_user');
+    location.href = 'index.html';
+  };
+  </script>
+</body>
+</html>
