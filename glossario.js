@@ -1,39 +1,23 @@
-'use strict';const terms={
-'API':'Interfaccia che consente a software diversi di scambiare richieste e dati. Le condizioni di accesso variano.',
-'ASN':'Numero che identifica un sistema autonomo di reti. Esempio: ricerca di prefissi tramite RIPEstat.',
-'BGP':'Protocollo per lo scambio di informazioni di raggiungibilità tra sistemi autonomi.',
-'CDN':'Rete distribuita che serve contenuti agli utenti. Un IP CDN non indica necessariamente il server originario.',
-'Certificate Transparency':'Registri pubblici dei certificati TLS. Un nome registrato non dimostra che il servizio sia ancora attivo.',
-'CTI':'Cyber Threat Intelligence: analisi di informazioni relative alle minacce informatiche.',
-'CVE':'Identificativo standard di una vulnerabilità pubblicamente catalogata.',
-'Data breach':'Violazione della sicurezza che comporta perdita, alterazione o accesso o divulgazione non autorizzati di dati.',
-'DNS':'Sistema distribuito che associa nomi a record, tra cui indirizzi IP e server di posta.',
-'DNS leak':'Risoluzione DNS che segue un percorso diverso da quello atteso nella configurazione di privacy.',
-'EXIF':'Formato di metadati fotografici, con possibili dati temporali, tecnici e GPS. I valori sono modificabili.',
-'Falso positivo':'Risultato presentato come corrispondente ma che non soddisfa la condizione cercata.',
-'Fingerprint del browser':'Insieme di caratteristiche osservabili del browser che contribuiscono a distinguerlo.',
-'GEOINT':'Analisi di informazioni geospaziali per ricavare conoscenza su luoghi e attività.',
-'Hash':'Valore derivato dai dati tramite una funzione. SHA-256 è utile per confrontare l’integrità di copie.',
-'IOC':'Indicatore di compromissione: elemento tecnico che suggerisce una possibile attività malevola.',
-'IP':'Indirizzo usato per comunicazioni su reti IP. IPv4 e IPv6 hanno formati e spazi distinti.',
-'ISP':'Fornitore di accesso o servizi Internet. Non coincide necessariamente con il titolare di una connessione.',
-'Link analysis':'Analisi delle relazioni tra entità. Un collegamento grafico richiede riscontro nella fonte.',
-'Metadati':'Dati che descrivono altri dati, ad esempio formato, autore dichiarato o data di modifica.',
-'NAT':'Traduzione degli indirizzi di rete, che consente anche la condivisione di un IP pubblico.',
-'OPSEC':'Misure per ridurre l’esposizione di informazioni operative e valutare i rischi.',
-'OSINT':'Open Source Intelligence: conoscenza prodotta dalla raccolta e analisi di fonti aperte.',
-'Proxy':'Intermediario che inoltra richieste per applicazioni configurate.',
-'RDAP':'Protocollo strutturato per consultare informazioni di registrazione di risorse Internet.',
-'rDNS':'Ricerca inversa DNS, tipicamente mediante record PTR.',
-'Reverse image search':'Ricerca di immagini uguali o simili e delle relative pubblicazioni.',
-'Sandbox':'Ambiente isolato per esaminare software o contenuti con restrizioni di esecuzione.',
-'SOCMINT':'Raccolta e analisi di informazioni provenienti dai social media.',
-'Timestamp':'Riferimento temporale associato a un evento o dato. Registra anche il fuso orario.',
-'TLS':'Protocollo di protezione delle comunicazioni in transito.',
-'UTC':'Tempo coordinato universale, riferimento per confrontare eventi temporali.',
-'VM':'Macchina virtuale, ambiente di elaborazione basato su risorse virtualizzate.',
-'VPN':'Rete privata virtuale che instrada traffico attraverso un tunnel secondo configurazione.',
-'VPS':'Server privato virtuale ospitato su infrastruttura condivisa.',
-'Web scraping':'Estrazione automatizzata di contenuti web, soggetta a regole di accesso e normativa.',
-'WHOIS':'Protocollo storico di consultazione dei dati di registrazione Internet.'};
-function render(){const q=document.getElementById('glossSearch').value.toLowerCase(), root=document.getElementById('terms');root.replaceChildren();for(const [k,v] of Object.entries(terms).sort((a,b)=>a[0].localeCompare(b[0],'it'))){if(!(k+' '+v).toLowerCase().includes(q))continue;const d=document.createElement('details'),s=document.createElement('summary'),p=document.createElement('p');s.textContent=k;p.textContent=v;d.append(s,p);if(q)d.open=true;root.append(d)}if(!root.children.length)root.textContent='Nessun termine trovato.'}document.getElementById('glossSearch').addEventListener('input',render);render();
+'use strict';
+const TERMS = [
+  { term: 'OSINT', def: 'Open Source Intelligence: intelligence basata su fonti aperte e pubbliche.' },
+  { term: 'SOCMINT', def: 'Social Media Intelligence: analisi delle informazioni pubbliche sui social network.' },
+  { term: 'GEOINT / IMINT', def: 'Geospatial & Imagery Intelligence: geolocalizzazione e analisi di immagini e video.' },
+  { term: 'ASN', def: 'Autonomous System Number: identificativo univoco di una rete IP su Internet.' },
+  { term: 'EXIF', def: 'Exchangeable Image File Format: metadati tecnici incorporati nei file fotografici.' },
+  { term: 'OPSEC', def: 'Operations Security: pratiche per proteggere l’identità e la sicurezza dell’analista.' }
+];
+const list = document.getElementById('glossaryList');
+const inp = document.getElementById('glossSearch');
+function renderGloss(q = ''){
+  if(!list) return;
+  list.replaceChildren();
+  TERMS.filter(t => (t.term + ' ' + t.def).toLowerCase().includes(q.toLowerCase())).forEach(t => {
+    const d = document.createElement('details');
+    const s = document.createElement('summary'); s.textContent = t.term;
+    const p = document.createElement('p'); p.textContent = t.def;
+    d.append(s, p); list.append(d);
+  });
+}
+if(inp) inp.oninput = () => renderGloss(inp.value);
+renderGloss();

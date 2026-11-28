@@ -1,8 +1,11 @@
--- Schema preliminare, NON collegato al frontend. Eseguire in progetto di prova.
-create table public.notes (id uuid primary key default gen_random_uuid(), owner uuid not null references auth.users(id) on delete cascade, body text not null default '', created_at timestamptz not null default now());
-alter table public.notes enable row level security;
-create policy own_notes on public.notes for all to authenticated using (owner=auth.uid()) with check (owner=auth.uid());
-create table public.favorites (owner uuid not null references auth.users(id) on delete cascade, resource_id bigint not null, primary key(owner,resource_id));
-alter table public.favorites enable row level security;
-create policy own_favorites on public.favorites for all to authenticated using (owner=auth.uid()) with check (owner=auth.uid());
--- Catalogo, moderazione, ruoli admin, rate limiting e logging richiedono ulteriore configurazione e verifica.
+-- Schema Supabase / PostgreSQL per OSINTHUB-ITA
+create table if not exists public.profiles (
+  id uuid references auth.users on delete cascade primary key,
+  email text unique not null,
+  display_name text,
+  role text default 'user' check (role in ('user', 'admin')),
+  created_at timestamptz default now()
+);
+
+alter table public.profiles enable row level security;
+create policy "Utenti vedono il proprio profilo" on public.profiles for select using (auth.uid() = id);

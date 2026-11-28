@@ -1,1 +1,135 @@
-<!doctype html><html lang="it"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"><main><a href="index.html">← Catalogo</a><h1>Editor locale del catalogo</h1><p>Non è un’area amministrativa autenticata. Modifica una copia del catalogo e scarica il JSON da sostituire su GitHub.</p><select id="pick"></select><button id="add">Nuova risorsa</button><form id="f"><label>Nome <input id="n" required></label><label>URL HTTPS <input id="u" type="url" required></label><label>Categoria <input id="c" required></label><label>Costo <select id="p"><option>Gratuito</option><option>Freemium</option><option>A pagamento</option></select></label><label>Descrizione <textarea id="d"></textarea></label><button>Salva nella copia locale</button></form><button id="download">Scarica resources.json</button><p id="msg"></p></main><script>const $=x=>document.getElementById(x);let a=[],id=null;function fill(){let s=$('pick');s.replaceChildren();for(let r of a){let o=document.createElement('option');o.value=r.id;o.textContent=r.name;s.append(o)}if(a.length)load(a[0].id)}function load(i){let r=a.find(x=>x.id==i);id=r.id;for(let [k,v] of Object.entries({n:r.name,u:r.url,c:r.category,p:r.price,d:r.description}))$(k).value=v}$('pick').onchange=e=>load(e.target.value);$('add').onclick=()=>{id=null;$('f').reset()};$('f').onsubmit=e=>{e.preventDefault();if(!$('u').value.startsWith('https://'))return;let r={id:id??Math.max(0,...a.map(x=>x.id))+1,name:$('n').value,url:$('u').value,category:$('c').value,price:$('p').value,description:$('d').value,status:'Da verificare'};a=a.filter(x=>x.id!==r.id);a.push(r);fill();$('msg').textContent='Modifica salvata in memoria. Scarica il catalogo prima di uscire.'};$('download').onclick=()=>{let url=URL.createObjectURL(new Blob([JSON.stringify(a,null,2)],{type:'application/json'}));let l=document.createElement('a');l.href=url;l.download='resources.json';l.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};fetch('resources.json').then(r=>r.json()).then(r=>{a=r;fill()}).catch(()=>$('msg').textContent='Errore caricamento catalogo')</script></html>
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pannello Amministratore | OSINTHUB-ITA</title>
+  <link rel="stylesheet" href="style.css?v=4.0">
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">OSINTHUB<span>-</span><i>I</i>T<b>A</b></a>
+    <nav>
+      <a href="index.html">Catalogo</a>
+      <a href="login.html">Account</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="adminLockScreen" class="auth-panel">
+      <h1>Accesso Riservato Amministratore</h1>
+      <p>Questa area è riservata agli amministratori autorizzati di OSINTHUB-ITA.</p>
+      <label>Codice PIN / Chiave Admin locale
+        <input type="password" id="adminPinInput" placeholder="Inserisci chiave amministratore">
+      </label>
+      <button type="button" class="action" id="unlockAdminBtn">Sblocca Pannello</button>
+      <p id="adminLockMsg" class="red"></p>
+      <p><small>Suggerimento: puoi accedere anche effettuando il login con l'email amministratore configurata in <code>login.html</code>.</small></p>
+    </section>
+
+    <section id="adminWorkspace" hidden>
+      <div class="catalog-head">
+        <h1>Pannello Amministratore</h1>
+        <button type="button" class="btn-cookie-reject" id="lockAdminBtn">Blocca ed Esci</button>
+      </div>
+      <p>Gestisci le risorse del catalogo OSINT, verifica le segnalazioni ed esporta il file <code>resources.json</code> aggiornato da caricare su GitHub.</p>
+
+      <div class="intel-panel">
+        <h2>Aggiungi nuovo strumento al catalogo</h2>
+        <form id="addToolForm">
+          <input type="text" id="tName" placeholder="Nome strumento (es. Shodan)" required>
+          <input type="url" id="tUrl" placeholder="URL https://..." required>
+          <select id="tCategory" required>
+            <option value="Motori di ricerca e Dorking">Motori di ricerca e Dorking</option>
+            <option value="Rete, Domini e IP">Rete, Domini e IP</option>
+            <option value="Social Media e Persone">Social Media e Persone</option>
+            <option value="Immagini, Video e Mappe">Immagini, Video e Mappe</option>
+            <option value="Threat Intelligence e Sicurezza">Threat Intelligence e Sicurezza</option>
+          </select>
+          <input type="text" id="tTopic" placeholder="Sotto-argomento (es. Analisi IP)" required>
+          <select id="tPrice">
+            <option value="Gratuito">Gratuito</option>
+            <option value="Freemium">Freemium</option>
+            <option value="A pagamento">A pagamento</option>
+          </select>
+          <textarea id="tDesc" rows="2" placeholder="Breve descrizione operativa..." required></textarea>
+          <button type="submit" class="action">Aggiungi alla lista</button>
+        </form>
+      </div>
+
+      <div class="intel-panel">
+        <h2>Esportazione Database Catalogo (<span id="adminToolCount">0</span> strumenti)</h2>
+        <p>Dopo aver aggiunto o modificato gli strumenti, scarica il file <code>resources.json</code> e caricalo nella radice del repository GitHub per pubblicare le modifiche.</p>
+        <button type="button" class="action" id="downloadJsonBtn">Scarica resources.json aggiornato</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const DEFAULT_ADMIN_PIN = 'OSINT2026';
+  let tools = [];
+
+  function checkAdminAccess(){
+    try{
+      const user = JSON.parse(localStorage.getItem('osinthub_user') || 'null');
+      const pinOk = sessionStorage.getItem('osinthub_admin_unlocked') === '1';
+      if((user && user.role === 'admin') || pinOk){
+        $('adminLockScreen').hidden = true;
+        $('adminWorkspace').hidden = false;
+        loadCatalog();
+      }
+    }catch{}
+  }
+
+  $('unlockAdminBtn').onclick = () => {
+    const val = $('adminPinInput').value.trim();
+    if(val === DEFAULT_ADMIN_PIN){
+      sessionStorage.setItem('osinthub_admin_unlocked', '1');
+      checkAdminAccess();
+    } else {
+      $('adminLockMsg').textContent = 'Chiave amministratore non valida.';
+    }
+  };
+
+  $('lockAdminBtn').onclick = () => {
+    sessionStorage.removeItem('osinthub_admin_unlocked');
+    location.href = 'index.html';
+  };
+
+  async function loadCatalog(){
+    try{
+      const r = await fetch('resources.json?v=' + Date.now());
+      if(r.ok) tools = await r.json();
+    }catch{}
+    $('adminToolCount').textContent = tools.length;
+  }
+
+  $('addToolForm').onsubmit = (e) => {
+    e.preventDefault();
+    tools.push({
+      name: $('tName').value.trim(),
+      url: $('tUrl').value.trim(),
+      category: $('tCategory').value,
+      topic: $('tTopic').value.trim(),
+      price: $('tPrice').value,
+      description: $('tDesc').value.trim()
+    });
+    $('adminToolCount').textContent = tools.length;
+    e.target.reset();
+    alert('Strumento aggiunto in memoria! Ricorda di scaricare resources.json aggiornato.');
+  };
+
+  $('downloadJsonBtn').onclick = () => {
+    const blob = new Blob([JSON.stringify(tools, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'resources.json';
+    a.click();
+  };
+
+  checkAdminAccess();
+  </script>
+</body>
+</html>

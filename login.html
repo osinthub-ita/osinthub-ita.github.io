@@ -1,103 +1,195 @@
 <!doctype html>
-<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Accesso e Registrazione | OSINTHUB-ITA</title><link rel="stylesheet" href="style.css?v=3.1"></head><body><header><a class="logo" href="index.html">OSINTHUB<span>-</span><i>I</i>T<b>A</b></a><a class="login-link" href="index.html">Catalogo</a></header><main><section class="auth-panel"><div class="auth-tabs"><button type="button" id="tabLogin" class="active">Accedi</button><button type="button" id="tabRegister">Registrati</button></div><h1 id="authTitle">Accedi al tuo account</h1><p id="authDesc">Area personale per preferiti, appunti e strumenti salvati.</p><p id="authMsg" role="status" class="auth-status"></p><form id="authForm"><label id="nameLabel" hidden>Nome / Nickname<input type="text" id="authName" placeholder="Es. AnalistaOSINT"></label><label>Email<input type="email" id="authEmail" required autocomplete="email" placeholder="nome@esempio.it"></label><label>Password<input type="password" id="authPassword" required autocomplete="current-password" placeholder="••••••••"></label><button type="submit" id="authSubmit" class="action">Accedi</button></form><div class="auth-secondary"><button type="button" id="btnGuest" class="btn-outline">Continua come Ospite</button><button type="button" id="btnRecover" class="btn-link">Recupera password</button></div><div id="loggedPanel" hidden><p>Accesso effettuato come <strong id="loggedUser"></strong>.</p><button type="button" id="btnGoCatalog" class="action">Vai al Catalogo</button><button type="button" id="btnLogout" class="btn-outline">Esci dall'account</button></div><p class="auth-footer"><a href="index.html">Torna al catalogo</a> · <a href="legal.html">Privacy e condizioni</a></p></section></main><script>
-const $=id=>document.getElementById(id);
-let mode='login';
-const params=new URLSearchParams(location.search);
-if(params.get('mode')==='register') mode='register';
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Accesso e Registrazione | OSINTHUB-ITA</title>
+  <link rel="stylesheet" href="style.css?v=4.0">
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">OSINTHUB<span>-</span><i>I</i>T<b>A</b></a>
+    <a class="login-link" href="index.html">← Catalogo</a>
+  </header>
 
-function syncMode(){
-  $('tabLogin').classList.toggle('active', mode==='login');
-  $('tabRegister').classList.toggle('active', mode==='register');
-  $('nameLabel').hidden = mode==='login';
-  $('authName').required = mode==='register';
-  $('authTitle').textContent = mode==='login' ? 'Accedi al tuo account' : 'Crea un nuovo account';
-  $('authSubmit').textContent = mode==='login' ? 'Accedi' : 'Registrati';
-  $('authMsg').textContent = '';
-}
+  <main>
+    <section class="auth-panel">
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab active" id="tabLogin">Accedi</button>
+        <button type="button" class="auth-tab" id="tabRegister">Registrati</button>
+      </div>
 
-function checkSession(){
-  const user = JSON.parse(localStorage.getItem('osinthub_user') || 'null');
-  if(user && !user.guest){
-    $('authForm').hidden = true;
-    $('tabLogin').parentElement.hidden = true;
-    document.querySelector('.auth-secondary').hidden = true;
-    $('authTitle').textContent = 'Profilo Utente';
-    $('loggedPanel').hidden = false;
-    $('loggedUser').textContent = user.name || user.email;
-  } else {
-    $('authForm').hidden = false;
-    $('tabLogin').parentElement.hidden = false;
-    document.querySelector('.auth-secondary').hidden = false;
-    $('loggedPanel').hidden = true;
-    syncMode();
+      <h1 id="authHeading">Accedi al tuo account</h1>
+      <p id="authSub">Area personale per preferenze, profilo e accesso amministrativo.</p>
+
+      <div id="authStatus" class="auth-status" role="status" hidden></div>
+
+      <form id="authForm">
+        <label id="nameField" hidden>
+          Nome / Nickname operativo
+          <input type="text" id="authName" placeholder="Es. Analista_IT" autocomplete="name">
+        </label>
+        <label>
+          Email
+          <input type="email" id="authEmail" required placeholder="nome@dominio.it" autocomplete="email">
+        </label>
+        <label>
+          Password
+          <input type="password" id="authPassword" required minlength="6" placeholder="Minimo 6 caratteri" autocomplete="current-password">
+        </label>
+        <button type="submit" class="action" id="authSubmitBtn">Accedi</button>
+      </form>
+
+      <div class="auth-secondary-actions">
+        <button type="button" class="btn-secondary" id="guestLoginBtn">Continua come Ospite</button>
+        <button type="button" class="link-btn" id="resetPwdBtn">Password dimenticata?</button>
+      </div>
+
+      <!-- Pannello Sessione Attiva -->
+      <div id="activeAccountBox" class="active-account-box" hidden>
+        <p id="activeAccountInfo"></p>
+        <div class="welcome-actions">
+          <a href="index.html?logged=1" class="action">Vai al Portale</a>
+          <a href="admin.html" class="btn-secondary" id="goAdminPanelBtn" hidden>Pannello Admin</a>
+          <button type="button" class="btn-cookie-reject" id="logoutBtn">Disconnetti</button>
+        </div>
+      </div>
+
+      <p class="gate-legal-note">
+        <a href="index.html">Torna al catalogo</a> · <a href="legal.html">Privacy, Cookie e condizioni d'uso</a>
+      </p>
+    </section>
+  </main>
+
+  <script>
+  'use strict';
+  // Configurazione Supabase (inserisci qui URL e Anon Key del tuo progetto Supabase per attivare l'invio email reale)
+  const SUPABASE_URL = '';
+  const SUPABASE_ANON_KEY = '';
+  // Email autorizzata automaticamente come Amministratore (inserisci la tua email admin)
+  const ADMIN_EMAILS = ['admin@osinthub-ita.it'];
+
+  const $ = id => document.getElementById(id);
+  let mode = new URLSearchParams(location.search).get('mode') === 'register' ? 'register' : 'login';
+
+  function setStatus(msg, isError = false){
+    const box = $('authStatus');
+    box.hidden = false;
+    box.textContent = msg;
+    box.style.borderColor = isError ? '#ef4444' : '#22c55e';
+    box.style.color = isError ? '#fca5a5' : '#86efac';
   }
-}
 
-$('tabLogin').onclick = () => { mode='login'; syncMode(); };
-$('tabRegister').onclick = () => { mode='register'; syncMode(); };
+  function updateModeUI(){
+    const isReg = mode === 'register';
+    $('tabLogin').classList.toggle('active', !isReg);
+    $('tabRegister').classList.toggle('active', isReg);
+    $('nameField').hidden = !isReg;
+    $('authHeading').textContent = isReg ? 'Crea un account OSINTHUB-ITA' : 'Accedi al tuo account';
+    $('authSubmitBtn').textContent = isReg ? 'Registrati ora' : 'Accedi';
+  }
 
-$('authForm').onsubmit = e => {
-  e.preventDefault();
-  const email = $('authEmail').value.trim().toLowerCase();
-  const pass = $('authPassword').value;
-  const name = $('authName').value.trim();
-  const users = JSON.parse(localStorage.getItem('osinthub_users') || '{}');
+  $('tabLogin').onclick = () => { mode = 'login'; updateModeUI(); };
+  $('tabRegister').onclick = () => { mode = 'register'; updateModeUI(); };
+  updateModeUI();
 
-  if(mode === 'register'){
-    if(users[email]){
-      $('authMsg').textContent = 'Questa email è già registrata. Prova ad accedere.';
-      $('authMsg').className = 'auth-status red';
+  function checkExistingSession(){
+    try{
+      const user = JSON.parse(localStorage.getItem('osinthub_user') || 'null');
+      if(user && !user.guest){
+        $('activeAccountBox').hidden = false;
+        $('activeAccountInfo').textContent = 'Sessione attiva: ' + (user.name || user.email) + (user.role === 'admin' ? ' [AMMINISTRATORE]' : '');
+        if(user.role === 'admin') $('goAdminPanelBtn').hidden = false;
+      }
+    }catch{}
+  }
+  checkExistingSession();
+
+  $('authForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const email = $('authEmail').value.trim().toLowerCase();
+    const password = $('authPassword').value;
+    const name = $('authName').value.trim() || email.split('@')[0];
+    const isAdmin = ADMIN_EMAILS.includes(email);
+
+    // Se Supabase è configurato, usa API Auth reale con invio email di conferma
+    if(SUPABASE_URL && SUPABASE_ANON_KEY){
+      try{
+        const endpoint = mode === 'register' ? '/auth/v1/signup' : '/auth/v1/token?grant_type=password';
+        const res = await fetch(SUPABASE_URL + endpoint, {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, data: { name } })
+        });
+        const data = await res.json();
+        if(!res.ok) throw new Error(data.error_description || data.msg || 'Errore autenticazione');
+        if(mode === 'register'){
+          setStatus('Registrazione completata! Controlla la tua casella email per confermare l’account.');
+          return;
+        }
+        const role = (data.user?.app_metadata?.role === 'admin' || isAdmin) ? 'admin' : 'user';
+        localStorage.setItem('osinthub_user', JSON.stringify({ email, name, role, token: data.access_token, guest: false }));
+        localStorage.setItem('legalSeen', '1');
+        location.href = 'index.html?logged=1';
+      }catch(err){
+        setStatus(err.message, true);
+      }
       return;
     }
-    users[email] = { name: name || email.split('@')[0], email, pass };
-    localStorage.setItem('osinthub_users', JSON.stringify(users));
-    localStorage.setItem('osinthub_user', JSON.stringify({ name: users[email].name, email, guest: false }));
-    localStorage.setItem('legalSeen', '1');
-    $('authMsg').textContent = 'Registrazione completata! Reindirizzamento...';
-    $('authMsg').className = 'auth-status green';
-    setTimeout(() => location.href = 'index.html', 800);
-  } else {
-    if(users[email] && users[email].pass === pass){
-      localStorage.setItem('osinthub_user', JSON.stringify({ name: users[email].name, email, guest: false }));
+
+    // Fallback locale sicuro finché non vengono inserite le chiavi Supabase
+    const users = JSON.parse(localStorage.getItem('osinthub_local_accounts') || '{}');
+    if(mode === 'register'){
+      if(users[email]){
+        setStatus('Questa email risulta già registrata. Passa ad "Accedi".', true);
+        return;
+      }
+      users[email] = { name, email, password, role: isAdmin ? 'admin' : 'user', created: new Date().toISOString() };
+      localStorage.setItem('osinthub_local_accounts', JSON.stringify(users));
+      localStorage.setItem('osinthub_user', JSON.stringify({ email, name, role: users[email].role, guest: false }));
       localStorage.setItem('legalSeen', '1');
-      $('authMsg').textContent = 'Accesso riuscito! Reindirizzamento...';
-      $('authMsg').className = 'auth-status green';
-      setTimeout(() => location.href = 'index.html', 800);
+      setStatus('Account registrato! Reindirizzamento al portale...');
+      setTimeout(() => { location.href = 'index.html?logged=1'; }, 700);
     } else {
-      $('authMsg').textContent = 'Credenziali non valide o utente non registrato.';
-      $('authMsg').className = 'auth-status red';
+      const acc = users[email];
+      if(!acc || acc.password !== password){
+        setStatus('Credenziali non valide o account non registrato su questo dispositivo.', true);
+        return;
+      }
+      localStorage.setItem('osinthub_user', JSON.stringify({ email, name: acc.name, role: acc.role, guest: false }));
+      localStorage.setItem('legalSeen', '1');
+      location.href = 'index.html?logged=1';
     }
-  }
-};
+  };
 
-$('btnGuest').onclick = () => {
-  localStorage.setItem('osinthub_user', JSON.stringify({ name: 'Ospite', guest: true }));
-  localStorage.setItem('legalSeen', '1');
-  location.href = 'index.html';
-};
+  $('guestLoginBtn').onclick = () => {
+    localStorage.setItem('osinthub_user', JSON.stringify({ name: 'Ospite', guest: true }));
+    localStorage.setItem('legalSeen', '1');
+    location.href = 'index.html';
+  };
 
-$('btnRecover').onclick = () => {
-  const email = $('authEmail').value.trim().toLowerCase();
-  if(!email){
-    $('authMsg').textContent = 'Inserisci la tua email nel campo sopra per recuperare la password.';
-    $('authMsg').className = 'auth-status amber';
-    return;
-  }
-  const users = JSON.parse(localStorage.getItem('osinthub_users') || '{}');
-  if(users[email]){
-    $('authMsg').textContent = 'Istruzioni di recupero inviate (Modalità locale: password attiva per ' + email + ').';
-    $('authMsg').className = 'auth-status green';
-  } else {
-    $('authMsg').textContent = 'Nessun account trovato con questa email.';
-    $('authMsg').className = 'auth-status red';
-  }
-};
+  $('resetPwdBtn').onclick = async () => {
+    const email = $('authEmail').value.trim().toLowerCase();
+    if(!email){
+      setStatus('Inserisci prima la tua email nel campo sopra per richiedere il recupero.', true);
+      return;
+    }
+    if(SUPABASE_URL && SUPABASE_ANON_KEY){
+      await fetch(SUPABASE_URL + '/auth/v1/recover', {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      setStatus('Se l’indirizzo è registrato, riceverai un’email con il link di ripristino password.');
+    } else {
+      setStatus('Per inviare email reali di recupero password inserisci URL e Anon Key Supabase in login.html.');
+    }
+  };
 
-$('btnGoCatalog').onclick = () => location.href = 'index.html';
-$('btnLogout').onclick = () => {
-  localStorage.removeItem('osinthub_user');
-  checkSession();
-};
-
-checkSession();
-</script></body></html>
+  $('logoutBtn')?.addEventListener('click', () => {
+    localStorage.removeItem('osinthub_user');
+    location.reload();
+  });
+  </script>
+</body>
+</html>

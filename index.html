@@ -4,18 +4,32 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   <title>OSINTHUB-ITA</title>
-  <link href="style.css?v=3.2" rel="stylesheet"/>
+  <link href="style.css?v=4.0" rel="stylesheet"/>
 </head>
 <body class="home">
-  <!-- Fake Hacker Terminal Boot Sequence -->
-  <div id="hackerTerminal" class="hacker-terminal" hidden aria-live="polite">
-    <div class="terminal-window">
+  <!-- Sequenza Terminale Hacker Immediata all'apertura -->
+  <div id="hackerTerminal" class="hacker-terminal" aria-live="polite">
+    <div class="terminal-window" onclick="event.stopPropagation()">
       <div class="terminal-header">
         <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
-        <span class="terminal-title">OSINTHUB-ITA // SECURE SHELL v3.2</span>
+        <span class="terminal-title">OSINTHUB-ITA // SECURE SHELL v4.0</span>
       </div>
       <pre id="terminalOutput" class="terminal-body"></pre>
-      <div class="terminal-footer">[ CLICCA OVUNQUE PER ACCEDERE AL PORTALE ]</div>
+      <div class="terminal-footer">[ CLICCA OVUNQUE PER PROSEGUIRE ]</div>
+    </div>
+  </div>
+
+  <!-- Overlay Scelta Accesso (Ospite / Accedi / Registrati) subito dopo il terminale -->
+  <div id="welcome" class="welcome-overlay" style="display:none">
+    <div class="welcome-modal-card" onclick="event.stopPropagation()">
+      <div class="gate-badge">ACCESSO PORTALE · OSINTHUB-ITA</div>
+      <h2>Benvenuto su OSINTHUB-ITA</h2>
+      <p>Scegli come desideri accedere al portale OSINT. Il catalogo è destinato a studio, formazione e ricerca lecita. Proseguendo accetti le <a href="legal.html">condizioni d’uso e l’informativa privacy/cookie</a>.</p>
+      <div class="welcome-actions">
+        <button class="action" id="acceptGuest" type="button">Accedi come Ospite</button>
+        <a class="action btn-outline" href="login.html?mode=login">Accedi</a>
+        <a class="action btn-outline" href="login.html?mode=register">Registrati</a>
+      </div>
     </div>
   </div>
 
@@ -74,9 +88,8 @@
   </nav>
 
   <main>
-    <!-- Hero banner pulito senza scritte sovrapposte sull'immagine -->
     <section class="hero hero-clean" aria-label="Banner OSINTHUB-ITA">
-      <img alt="OSINTHUB-ITA Cybersecurity & OSINT Intelligence" class="hero-banner-img" src="hero.webp?v=3"/>
+      <img alt="OSINTHUB-ITA Cybersecurity & OSINT Intelligence" class="hero-banner-img" src="hero.webp?v=4"/>
     </section>
 
     <section aria-label="Catalogo OSINT" id="catalogo">
@@ -109,22 +122,50 @@
   </main>
 
   <footer>
-    <a href="legal.html">Disclaimer · Privacy · Cookie · Normativa</a>
+    <div class="footer-links">
+      <a href="legal.html">Disclaimer · Privacy · Cookie Policy · Normativa</a>
+      <span aria-hidden="true"> · </span>
+      <button class="link-btn" id="openCookiePrefs" type="button">Gestisci preferenze cookie</button>
+      <span aria-hidden="true"> · </span>
+      <button class="link-btn" id="switchAccessMode" type="button">Cambia modalità accesso</button>
+    </div>
     <p>Progetto indipendente, non istituzionale.</p>
   </footer>
 
-  <!-- Modale iniziale con scelta Ospite / Accedi / Registrati e informativa Cookie/Privacy -->
-  <dialog id="welcome">
-    <h2>Benvenuto su OSINTHUB-ITA</h2>
-    <p>Il catalogo è destinato a studio, formazione e ricerca lecita. Questo portale utilizza solo memoria tecnica locale (no cookie di profilazione). Proseguendo accetti le <a href="legal.html">condizioni d’uso e l’informativa privacy/cookie</a>.</p>
-    <div class="welcome-actions">
-      <button class="action" id="acceptGuest">Accedi come Ospite</button>
-      <a class="action btn-outline" href="login.html?mode=login">Accedi</a>
-      <a class="action btn-outline" href="login.html?mode=register">Registrati</a>
+  <!-- Banner Cookie Obbligatori a Norma di Legge (Garante Privacy IT / GDPR / Hosting USA GitHub & Cloudflare) -->
+  <aside aria-label="Informativa sui cookie" class="cookie-banner" hidden="" id="cookieBanner" role="region">
+    <div class="cookie-content">
+      <div class="cookie-header">
+        <strong>Informativa sull'uso dei Cookie e Archiviazione Locale</strong>
+        <button aria-label="Chiudi e mantieni solo cookie tecnici" class="cookie-close" id="cookieCloseX" title="Chiudi (solo tecnici)" type="button">✕</button>
+      </div>
+      <p>
+        Questo sito utilizza <strong>cookie tecnici e archiviazione locale (<code>localStorage</code>) strettamente necessari</strong> al funzionamento del portale, della sessione ospite/utente e alla registrazione delle scelte di consenso (art. 122 D.Lgs. 196/2003 e Linee Guida Garante Privacy). L'infrastruttura di hosting (<strong>GitHub Pages</strong>, USA) e di sicurezza/rete (<strong>Cloudflare</strong> e <strong>ipapi.is</strong>) elabora dati tecnici di rete secondo i rispettivi regimi (EU-US Data Privacy Framework / SCC).
+      </p>
+      <div class="cookie-prefs" hidden="" id="cookiePrefsPanel">
+        <label class="cookie-opt">
+          <input checked="" disabled="" type="checkbox"/>
+          <span><strong>Tecnici e strettamente necessari (Sempre attivi)</strong> — Indispensabili per sicurezza, navigazione, gestione sessione e prova del consenso.</span>
+        </label>
+        <label class="cookie-opt">
+          <input id="optFunctional" type="checkbox"/>
+          <span><strong>Funzionali e preferenze interfaccia</strong> — Memorizzano filtri e impostazioni locali sul dispositivo.</span>
+        </label>
+        <label class="cookie-opt">
+          <input id="optNetworkDiag" type="checkbox" checked=""/>
+          <span><strong>Diagnostica rete e analisi IP/VPN (Cloudflare / ipapi.is)</strong> — Rilevamento in tempo reale di IP pubblico, ASN e stato VPN tramite Worker Cloudflare.</span>
+        </label>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn-cookie-reject" id="cookieReject" type="button">Rifiuta non necessari</button>
+        <button class="btn-cookie-custom" id="cookieCustomize" type="button">Personalizza</button>
+        <button class="btn-cookie-save" hidden="" id="cookieSavePrefs" type="button">Salva preferenze</button>
+        <button class="btn-cookie-accept" id="cookieAcceptAll" type="button">Accetta tutto</button>
+      </div>
     </div>
-  </dialog>
+  </aside>
 
-  <script src="app.js?v=3.2"></script>
-  <script src="intelligence.js?v=3.0"></script>
+  <script src="app.js?v=4.0"></script>
+  <script src="intelligence.js?v=4.0"></script>
 </body>
 </html>

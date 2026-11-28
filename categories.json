@@ -1,36 +1,22 @@
 {
-  "Ricerca e identificativi": [
-    "Username",
-    "Email",
-    "Numeri telefonici",
-    "Social OSINT",
-    "Data breach",
-    "Aziende e registri",
-    "Ricerca avanzata e directory"
+  "Motori di ricerca e Dorking": [
+    "Motori generalisti",
+    "Archivi web e cache"
   ],
-  "IP, domini e sicurezza informatica": [
-    "IP, ISP e ASN",
-    "Geolocalizzazione IP",
-    "Domini e DNS",
-    "Threat Intelligence",
-    "Vulnerabilità"
+  "Rete, Domini e IP": [
+    "Analisi IP e ASN",
+    "DNS e sottodomini"
   ],
-  "GEOINT e IMINT": [
-    "Immagini inverse",
-    "Analisi foto e video",
-    "Geolocalizzazione visiva",
-    "Traffico aereo e navale"
+  "Social Media e Persone": [
+    "Ricerca Username",
+    "Analisi Social"
   ],
-  "Analisi e documentazione": [
-    "Archivi web",
-    "Automazione e correlazione",
-    "Documentazione"
+  "Immagini, Video e Mappe": [
+    "Ricerca inversa immagini",
+    "Geolocalizzazione e mappe"
   ],
-  "OPSEC e sicurezza operativa": [
-    "VPN e proxy",
-    "Privacy del browser",
-    "Verifica connessione",
-    "Macchine virtuali",
-    "Protezione operativa"
+  "Threat Intelligence e Sicurezza": [
+    "Reputazione e Malware",
+    "Data Breach e Leak"
   ]
 }
