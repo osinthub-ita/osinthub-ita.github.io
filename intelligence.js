@@ -3,7 +3,6 @@
 const clock=(zone)=>new Intl.DateTimeFormat('it-IT',{timeZone:zone,hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23',timeZoneName:'short'}).format(new Date());
 function tick(){if(g('itclock'))g('itclock').textContent=clock('Europe/Rome');if(g('utcclock'))g('utcclock').textContent=clock('UTC')}
 tick();setInterval(tick,1000);
-
 function isNetworkDiagAllowed(){
   try{
     const raw = localStorage.getItem('osinthub_cookie_consent_v1');
@@ -12,7 +11,6 @@ function isNetworkDiagAllowed(){
     return parsed.networkDiag !== false;
   }catch{return true}
 }
-
 const field=(k,v)=>{const a=document.createElement('dt'),b=document.createElement('dd');a.textContent=k;b.textContent=v||'Non disponibile';g('footprint').append(a,b)};
 function footprint(d={}){
   if(!g('footprint'))return;
@@ -59,12 +57,8 @@ function clearNetwork(msg){
 }
 async function lookup(){
   if(!enabled)return;
-  if(!isNetworkDiagAllowed()){
-    clearNetwork('ISP: analisi IP disattivata dalle preferenze cookie');
-    return;
-  }
-  const seq=++sequence;
-  controller=new AbortController();
+  if(!isNetworkDiagAllowed()){ clearNetwork('ISP: analisi IP disattivata dalle preferenze cookie'); return; }
+  const seq=++sequence; controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),10000);
   try{
     const r=await fetch('https://osinthub-ip-check.osinthub-3b0.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}',signal:controller.signal,cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});
@@ -84,38 +78,21 @@ async function lookup(){
     const lat=geo.latitude??geo.lat,lon=geo.longitude??geo.lon;
     g('mapinfo').textContent=[geo.city,geo.country].filter(Boolean).join(', ')||'Posizione non disponibile';
     if(typeof lat==='number'&&typeof lon==='number'&&Math.abs(lat)<=90&&Math.abs(lon)<=180){
-      g('mapdot').setAttribute('cx',lon+180);
-      g('mapdot').setAttribute('cy',90-lat);
-      g('mapdot').setAttribute('visibility','visible');
+      g('mapdot').setAttribute('cx',lon+180); g('mapdot').setAttribute('cy',90-lat); g('mapdot').setAttribute('visibility','visible');
     }else g('mapdot').setAttribute('visibility','hidden');
     timer=setTimeout(()=>{if(!document.hidden)lookup();else timer=setTimeout(waitVisible,300000)},300000);
   }catch(e){
-    if(seq===sequence){
-      clearNetwork('ISP: servizio non disponibile');
-      timer=setTimeout(waitVisible,300000);
-    }
+    if(seq===sequence){ clearNetwork('ISP: servizio non disponibile'); timer=setTimeout(waitVisible,300000); }
   }finally{clearTimeout(timeout)}
 }
-function waitVisible(){
-  if(!enabled)return;
-  if(document.hidden)timer=setTimeout(waitVisible,300000);
-  else lookup();
-}
-window.addEventListener('osint:consent-updated', ()=>{
-  clearTimeout(timer);
-  if(isNetworkDiagAllowed()) lookup();
-  else clearNetwork('ISP: analisi IP disattivata dalle preferenze cookie');
-});
+function waitVisible(){ if(!enabled)return; if(document.hidden)timer=setTimeout(waitVisible,300000); else lookup(); }
+window.addEventListener('osint:consent-updated', ()=>{ clearTimeout(timer); if(isNetworkDiagAllowed()) lookup(); else clearNetwork('ISP: analisi IP disattivata dalle preferenze cookie'); });
 waitVisible();
-
 function links(node,rows){
-  if(!node)return;
-  node.replaceChildren();
+  if(!node)return; node.replaceChildren();
   for(const r of rows){
     if(!/^https:\/\//.test(r.url))continue;
-    const a=document.createElement('a');
-    a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';
-    a.textContent=r.name+' ↗';
+    const a=document.createElement('a'); a.href=r.url; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent=r.name+' ↗';
     node.append(a);
   }
 }

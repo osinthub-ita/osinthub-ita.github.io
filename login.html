@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Accesso e Registrazione | OSINTHUB-ITA</title>
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=5.1">
 </head>
 <body>
   <header>
@@ -45,11 +45,10 @@
         <button type="button" class="link-btn" id="resetPwdBtn">Password dimenticata?</button>
       </div>
 
-      <!-- Pannello Sessione Attiva -->
       <div id="activeAccountBox" class="active-account-box" hidden>
         <p id="activeAccountInfo"></p>
         <div class="welcome-actions">
-          <a href="index.html?logged=1" class="action">Vai al Portale</a>
+          <a href="user.html" class="action">Apri Area Utente</a>
           <a href="admin.html" class="btn-secondary" id="goAdminPanelBtn" hidden>Pannello Admin</a>
           <button type="button" class="btn-cookie-reject" id="logoutBtn">Disconnetti</button>
         </div>
@@ -63,10 +62,8 @@
 
   <script>
   'use strict';
-  // Configurazione Supabase (inserisci qui URL e Anon Key del tuo progetto Supabase per attivare l'invio email reale)
   const SUPABASE_URL = '';
   const SUPABASE_ANON_KEY = '';
-  // Email autorizzata automaticamente come Amministratore (inserisci la tua email admin)
   const ADMIN_EMAILS = ['admin@osinthub-ita.it'];
 
   const $ = id => document.getElementById(id);
@@ -112,7 +109,6 @@
     const name = $('authName').value.trim() || email.split('@')[0];
     const isAdmin = ADMIN_EMAILS.includes(email);
 
-    // Se Supabase è configurato, usa API Auth reale con invio email di conferma
     if(SUPABASE_URL && SUPABASE_ANON_KEY){
       try{
         const endpoint = mode === 'register' ? '/auth/v1/signup' : '/auth/v1/token?grant_type=password';
@@ -137,7 +133,6 @@
       return;
     }
 
-    // Fallback locale sicuro finché non vengono inserite le chiavi Supabase
     const users = JSON.parse(localStorage.getItem('osinthub_local_accounts') || '{}');
     if(mode === 'register'){
       if(users[email]){
@@ -148,12 +143,12 @@
       localStorage.setItem('osinthub_local_accounts', JSON.stringify(users));
       localStorage.setItem('osinthub_user', JSON.stringify({ email, name, role: users[email].role, guest: false }));
       localStorage.setItem('legalSeen', '1');
-      setStatus('Account registrato! Reindirizzamento al portale...');
-      setTimeout(() => { location.href = 'index.html?logged=1'; }, 700);
+      setStatus('Account registrato! Accesso in corso...');
+      setTimeout(() => { location.href = 'index.html?logged=1'; }, 600);
     } else {
       const acc = users[email];
       if(!acc || acc.password !== password){
-        setStatus('Credenziali non valide o account non registrato su questo dispositivo.', true);
+        setStatus('Credenziali non valide o account non registrato.', true);
         return;
       }
       localStorage.setItem('osinthub_user', JSON.stringify({ email, name: acc.name, role: acc.role, guest: false }));

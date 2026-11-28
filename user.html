@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Area Personale Utente | OSINTHUB-ITA</title>
-  <link rel="stylesheet" href="style.css?v=5.0">
+  <link rel="stylesheet" href="style.css?v=5.1">
 </head>
 <body>
   <header>
@@ -72,7 +72,6 @@
     }
   }
 
-  // Preferiti
   async function loadUserFavorites(){
     const favNames = JSON.parse(localStorage.getItem('osinthub_favorites') || '[]');
     $('favCount').textContent = favNames.length;
@@ -107,7 +106,6 @@
   };
   loadUserFavorites();
 
-  // Note personali
   const notesKey = 'osinthub_notes_' + (user?.email || 'default');
   $('uNotesArea').value = localStorage.getItem(notesKey) || '';
   $('uSaveNotesBtn').onclick = () => {
@@ -116,7 +114,6 @@
     setTimeout(() => { $('uNotesStatus').textContent = ''; }, 2500);
   };
 
-  // Segnalazioni inviate
   const reports = JSON.parse(localStorage.getItem('osinthub_reports') || '[]').filter(r => !user?.email || r.author === user.email || r.author === 'Ospite');
   const repBox = $('uReportsList');
   if(!reports.length){

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Legalità, Privacy e Cookie Policy | OSINTHUB-ITA</title>
-  <link rel="stylesheet" href="style.css?v=4.0">
+  <link rel="stylesheet" href="style.css?v=5.1">
 </head>
 <body>
   <header>
@@ -14,22 +14,17 @@
   <main>
     <h1>Legalità, Privacy e Cookie Policy</h1>
     <p>Portale indipendente di studio e formazione OSINT. I collegamenti rimandano a servizi di terzi. Nessuna affiliazione istituzionale è dichiarata. La disponibilità pubblica di una fonte non autorizza violazioni di sistemi, dati o diritti di terzi.</p>
-
     <h2>Riferimenti normativi</h2>
-    <p>Codice penale italiano: artt. 615-ter, 615-quater, 617-quater, 494 e 595. Regolamento (UE) 2016/679 (GDPR), artt. 5, 6, 13, 25, 32 e 44-49. D.Lgs. 196/2003 (Codice Privacy), art. 122 e Provvedimento del Garante per la Protezione dei Dati Personali del 10 giugno 2021 (Linee guida cookie e altri strumenti di tracciamento).</p>
-
+    <p>Codice penale italiano: artt. 615-ter, 615-quater, 617-quater, 494 e 595. Regolamento (UE) 2016/679 (GDPR), artt. 5, 6, 13, 25, 32 e 44-49. D.Lgs. 196/2003 (Codice Privacy), art. 122 e Provvedimento del Garante per la Protezione dei Dati Personali del 10 giugno 2021.</p>
     <h2 id="cookie">Cookie Policy e Strumenti di Archiviazione Locale</h2>
-    <p>In conformità all'art. 122 del D.Lgs. 196/2003 e alle Linee Guida del Garante Privacy, questo sito utilizza:</p>
     <ul>
-      <li><strong>Cookie tecnici e archiviazione locale strettamente necessari:</strong> il cookie tecnico di prima parte <code>osinthub_consent</code> (durata 180 giorni) e le chiavi <code>localStorage</code> tecniche (<code>osinthub_cookie_consent_v1</code>, <code>osinthub_user</code>) servono esclusivamente a memorizzare le preferenze di consenso, la modalità di accesso (ospite o utente registrato) e a garantire la sicurezza della navigazione. Non richiedono consenso preventivo ma vengono documentati in questa informativa.</li>
-      <li><strong>Funzionali (opzionali):</strong> memorizzano preferenze d'interfaccia e filtri di ricerca sul dispositivo locale.</li>
-      <li><strong>Diagnostica di rete e analisi IP/VPN (opzionale / disattivabile):</strong> consente la verifica in tempo reale di indirizzo IP pubblico, operatore ASN e indicatori VPN/Proxy tramite Cloudflare Worker e ipapi.is.</li>
+      <li><strong>Cookie tecnici e archiviazione locale strettamente necessari:</strong> il cookie tecnico di prima parte <code>osinthub_consent</code> (durata 180 giorni) e le chiavi <code>localStorage</code> tecniche (<code>osinthub_cookie_consent_v1</code>, <code>osinthub_user</code>) memorizzano le preferenze di consenso e la sessione ospite/utente.</li>
+      <li><strong>Funzionali (opzionali):</strong> memorizzano filtri, preferiti e note locali sul dispositivo.</li>
+      <li><strong>Diagnostica di rete e analisi IP/VPN:</strong> verifica in tempo reale di IP pubblico, ASN e indicatori VPN/Proxy tramite Cloudflare Worker e ipapi.is.</li>
     </ul>
-    <p>Puoi revocare o modificare le tue preferenze in qualsiasi momento dal pulsante <em>"Gestisci preferenze cookie"</em> nel footer della homepage oppure azzerare tutti i dati locali con il pulsante seguente:</p>
-    <button type="button" class="action" onclick="localStorage.clear();document.cookie='osinthub_consent=; Max-Age=0; path=/';location.href='index.html'">Cancella tutti i cookie e i dati locali</button>
-
+    <button type="button" class="action" onclick="localStorage.clear();sessionStorage.clear();document.cookie='osinthub_consent=; Max-Age=0; path=/';location.href='index.html'">Cancella tutti i cookie e i dati locali</button>
     <h2 id="network">Hosting Estero e Analisi Automatica della Connessione</h2>
-    <p>Il sito è ospitato su <strong>GitHub Pages</strong> (GitHub, Inc. / Microsoft Corp., USA). I servizi di sicurezza, edge computing e analisi IP/VPN utilizzano <strong>Cloudflare, Inc.</strong> (USA) e <strong>ipapi.is</strong>. I trasferimenti di dati tecnici di connessione verso gli Stati Uniti avvengono nel rispetto del Capo V del GDPR (EU-US Data Privacy Framework e Clausole Contrattuali Tipo - SCC). La chiave API di ipapi.is è custodita come variabile segreta lato server su Cloudflare Worker e non è mai esposta nel codice pubblico.</p>
+    <p>Il sito è ospitato su <strong>GitHub Pages</strong> (USA) e utilizza <strong>Cloudflare</strong> e <strong>ipapi.is</strong> per la diagnostica di rete secondo il Capo V del GDPR (EU-US Data Privacy Framework / SCC).</p>
   </main>
 </body>
 </html>

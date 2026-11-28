@@ -35,7 +35,7 @@ header .login-link{margin-left:auto;background:#0b202b;border:1px solid #24677a;
 .hero-clean{padding:0;border:1px solid #225065;border-radius:18px;overflow:hidden;background:#060e16;margin-bottom:24px;box-shadow:0 0 35px #00c8ff0b}
 .hero-banner-img{display:block;width:100%;max-height:360px;object-fit:cover}
 
-.catalog-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin:24px 0 10px}
+.catalog-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0 10px}
 .catalog-head h2{font-size:20px;margin:0}
 #count{font-size:13px;margin:0;color:var(--muted)}
 .macro{padding:0;background:linear-gradient(110deg,#0c1c29,#09121c 70%);border:1px solid #1c394a;border-radius:13px;margin:10px 0}
@@ -54,6 +54,9 @@ header .login-link{margin-left:auto;background:#0b202b;border:1px solid #24677a;
 .tool-grid article{display:flex;flex-direction:column;padding:14px;background:#0a1722;border:1px solid #214254;border-radius:12px}
 .tool-grid article h3{margin:0 0 6px;font-size:18px}
 .tool-grid article p{flex:1;margin:8px 0 12px}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fav-btn{padding:4px 9px;font-size:12px;border-radius:6px;background:#091824;border:1px solid #254f63;color:#9ab0c1}
+.fav-btn.is-fav{border-color:#facc15;color:#fde047;background:#1f1c0b}
 .tag{font-size:12px;font-weight:bold}
 .green{color:#72e99a}.amber{color:#ffd17b}.red{color:#ff9292}
 .card-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
@@ -69,13 +72,20 @@ header .login-link{margin-left:auto;background:#0b202b;border:1px solid #24677a;
 .intel-panel a{display:inline-block;margin:5px 10px 5px 0;color:#71d8ec}
 .intel-panel form{display:grid;gap:10px}
 
+.user-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:850px){.user-grid{grid-template-columns:1fr 1fr}}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.stat-card{padding:16px;background:#081622;border:1px solid #224e63;border-radius:12px;display:flex;flex-direction:column;gap:6px}
+.stat-card small{font:700 11px ui-monospace,monospace;color:#80c5d7}
+.stat-card strong{font-size:26px;color:#fff}
+.admin-row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px;background:#061019;border:1px solid #1b3b4c;border-radius:10px;margin:8px 0}
+
 footer{border-top:1px solid #183340;font-size:13px}
 .footer-links{margin-bottom:8px}
 
-/* Auth & Admin Panels */
 .auth-panel{max-width:460px;margin:32px auto;padding:24px;background:#0a1722;border:1px solid #214254;border-radius:16px}
 .auth-panel label{display:block;margin:12px 0}
-.auth-panel input{width:100%;margin-top:6px}
+.auth-panel input,.auth-panel textarea{width:100%;margin-top:6px}
 .auth-panel button[type=submit]{width:100%;margin-top:14px}
 .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
 .auth-tab{background:#09131e;border:1px solid #244653;color:#9ab0c1;font-weight:700}
@@ -100,7 +110,6 @@ footer{border-top:1px solid #183340;font-size:13px}
 .terminal-footer{padding:11px 14px;background:#010d04;border-top:1px solid #0b4d1c;text-align:center;font:700 12px ui-monospace,monospace;color:#00ff41;letter-spacing:.12em;animation:pulseText 1.4s infinite}
 @keyframes pulseText{0%,100%{opacity:1}50%{opacity:.4}}
 
-/* Modale Scelta Accesso (Ospite / Login / Registrati) */
 .welcome-overlay{position:fixed;inset:0;z-index:9998;background:rgba(3,8,14,0.92);display:none;place-items:center;padding:20px}
 .welcome-modal-card{width:100%;max-width:520px;background:#081520;border:1px solid #2b677d;border-radius:16px;padding:26px;box-shadow:0 20px 50px #000c;color:#eef7ff}
 .gate-badge{display:inline-block;font:700 11px ui-monospace,monospace;color:#30dfff;background:#0c2938;border:1px solid #1d576e;padding:4px 9px;border-radius:6px;margin-bottom:10px}
@@ -109,7 +118,6 @@ footer{border-top:1px solid #183340;font-size:13px}
 .welcome-actions{display:flex;flex-wrap:wrap;gap:10px}
 .welcome-actions .action,.welcome-actions .btn-outline,.welcome-actions .btn-secondary{flex:1 1 auto}
 
-/* Banner Cookie Granulare a Norma di Legge */
 .cookie-banner{position:fixed;bottom:14px;left:14px;right:14px;z-index:9999;max-width:960px;margin:auto;background:#081520;border:1px solid #2c6e85;border-radius:14px;padding:18px;box-shadow:0 16px 40px #000d}
 .cookie-banner[hidden]{display:none}
 .cookie-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;color:#fff}
