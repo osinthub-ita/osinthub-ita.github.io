@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Pannello Amministratore | OSINTHUB-ITA</title>
-  <link rel="stylesheet" href="style.css?v=5.1">
+  <link rel="stylesheet" href="style.css?v=6.0">
 </head>
 <body>
   <header>
@@ -18,9 +18,9 @@
   <main>
     <section id="adminLockScreen" class="auth-panel">
       <h1>Accesso Riservato Amministratore</h1>
-      <p>Inserisci il PIN amministratore oppure effettua il login con l'email amministratore autorizzata.</p>
-      <label>Codice PIN Amministratore
-        <input type="password" id="adminPinInput" placeholder="PIN (predefinito: OSINT2026)">
+      <p>Inserisci la password amministratore oppure effettua il login con l'account amministratore autorizzato.</p>
+      <label>Password Amministratore
+        <input type="password" id="adminPinInput" placeholder="••••••••••••" autocomplete="current-password">
       </label>
       <button type="button" class="action" id="unlockAdminBtn">Sblocca Pannello Admin</button>
       <p id="adminLockMsg" class="red"></p>
@@ -49,14 +49,14 @@
           <strong id="statReports">0</strong>
         </div>
         <div class="stat-card">
-          <small>STATO HOSTING & WORKER</small>
-          <strong class="green" style="font-size:18px">ONLINE (HTTPS)</strong>
+          <small>SINCRONIZZAZIONE UTENTI</small>
+          <strong id="statSyncMode" style="font-size:15px;color:#30dfff">VERIFICA…</strong>
         </div>
       </div>
 
       <div class="intel-panel">
-        <h2>👥 Utenti Registrati</h2>
-        <p>Elenco degli account registrati sul sito (collegando Supabase con <code>service_role</code> o tabella <code>profiles</code> sincronizza automaticamente anche gli iscritti remoti).</p>
+        <h2>👥 Utenti Registrati (Cross-Device / Cloud & Locali)</h2>
+        <div id="syncBannerInfo"></div>
         <div id="adminUsersList"></div>
       </div>
 
@@ -95,8 +95,19 @@
   <script>
   'use strict';
   const $ = id => document.getElementById(id);
-  const DEFAULT_ADMIN_PIN = 'OSINT2026';
+  // Hash SHA-256 della password amministratore "123456Asdfgh" (mai esposta in chiaro)
+  const ADMIN_PASS_HASH = 'c8d45d05a4ea4c7353d3be06e4ef1bc45be7e822ba895bcbe422f71c432b38bb';
+
+  // Configurazione Supabase (inserisci qui URL e Anon Key per sincronizzare gli utenti tra PC e smartphone)
+  const SUPABASE_URL = '';
+  const SUPABASE_ANON_KEY = '';
+
   let tools = [];
+
+  async function sha256(str){
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
 
   function checkAdminAccess(){
     try{
@@ -110,20 +121,36 @@
     }catch{}
   }
 
-  $('unlockAdminBtn').onclick = () => {
+  $('unlockAdminBtn').onclick = async () => {
     const val = $('adminPinInput').value.trim();
-    if(val === DEFAULT_ADMIN_PIN){
+    const h = await sha256(val);
+    if(h === ADMIN_PASS_HASH){
       sessionStorage.setItem('osinthub_admin_unlocked', '1');
       checkAdminAccess();
     } else {
-      $('adminLockMsg').textContent = 'PIN amministratore non valido.';
+      $('adminLockMsg').textContent = 'Password amministratore non valida.';
     }
   };
+
+  $('adminPinInput').addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') $('unlockAdminBtn').click();
+  });
 
   $('lockAdminBtn').onclick = () => {
     sessionStorage.removeItem('osinthub_admin_unlocked');
     location.href = 'index.html';
   };
+
+  async function fetchCloudUsers(){
+    if(!SUPABASE_URL || !SUPABASE_ANON_KEY) return null;
+    try{
+      const res = await fetch(SUPABASE_URL + '/rest/v1/profiles?select=email,display_name,role,created_at&order=created_at.desc', {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + SUPABASE_ANON_KEY }
+      });
+      if(res.ok) return await res.json();
+    }catch{}
+    return null;
+  }
 
   async function initDashboard(){
     try{
@@ -132,20 +159,44 @@
     }catch{}
     $('statTools').textContent = tools.length;
 
-    const accounts = Object.values(JSON.parse(localStorage.getItem('osinthub_local_accounts') || '{}'));
-    $('statUsers').textContent = accounts.length;
     const uBox = $('adminUsersList');
+    const syncBanner = $('syncBannerInfo');
     uBox.replaceChildren();
-    if(!accounts.length){
-      uBox.innerHTML = '<p>Nessun utente registrato localmente su questo dispositivo. Per visualizzare gli iscritti globali da qualsiasi dispositivo, accedi alla dashboard del tuo progetto <strong>Supabase → Authentication → Users</strong>.</p>';
+
+    const cloudUsers = await fetchCloudUsers();
+    const localAccounts = Object.values(JSON.parse(localStorage.getItem('osinthub_local_accounts') || '{}'));
+
+    if(cloudUsers){
+      $('statSyncMode').textContent = 'CLOUD SUPABASE ATTIVO';
+      $('statSyncMode').style.color = '#4ade80';
+      syncBanner.innerHTML = '<p class="green">Sincronizzazione cloud attiva: stai visualizzando tutti gli utenti registrati da qualsiasi dispositivo.</p>';
+      $('statUsers').textContent = cloudUsers.length;
+      if(!cloudUsers.length){
+        uBox.innerHTML = '<p>Nessun utente registrato nel database cloud.</p>';
+      } else {
+        cloudUsers.forEach(acc => {
+          const row = document.createElement('div');
+          row.className = 'admin-row';
+          row.innerHTML = `<div><strong>${acc.display_name || acc.email.split('@')[0]}</strong> — <code>${acc.email}</code><br><small>Registrato il: ${new Date(acc.created_at).toLocaleDateString('it-IT')} · Ruolo: ${acc.role}</small></div>`;
+          uBox.append(row);
+        });
+      }
     } else {
-      accounts.forEach(acc => {
-        const row = document.createElement('div');
-        row.className = 'admin-row';
-        row.innerHTML = `<div><strong>${acc.name}</strong> — <code>${acc.email}</code><br><small>Registrato il: ${new Date(acc.created).toLocaleDateString('it-IT')} · Ruolo: ${acc.role}</small></div>
-          <button type="button" class="btn-secondary" onclick="toggleRole('${acc.email}')">Cambia Ruolo</button>`;
-        uBox.append(row);
-      });
+      $('statSyncMode').textContent = 'SOLO LOCALE (BROWSER)';
+      $('statSyncMode').style.color = '#fbbf24';
+      syncBanner.innerHTML = '<p style="background:#071622;border-left:3px solid #fbbf24;padding:10px 12px;border-radius:6px;font-size:13px"><strong>Nota tecnica:</strong> GitHub Pages è un hosting statico privo di database proprio. Finché non inserisci <code>SUPABASE_URL</code> e <code>SUPABASE_ANON_KEY</code> in <code>login.html</code> e <code>admin.html</code> (eseguendo lo script SQL <code>backend-draft.sql</code> su Supabase), le registrazioni restano salvate nella memoria locale del singolo dispositivo (PC o smartphone) su cui sono state create.</p>';
+      $('statUsers').textContent = localAccounts.length;
+      if(!localAccounts.length){
+        uBox.innerHTML = '<p>Nessun utente registrato nella memoria locale di questo dispositivo.</p>';
+      } else {
+        localAccounts.forEach(acc => {
+          const row = document.createElement('div');
+          row.className = 'admin-row';
+          row.innerHTML = `<div><strong>${acc.name}</strong> — <code>${acc.email}</code><br><small>Registrato il: ${new Date(acc.created).toLocaleDateString('it-IT')} · Ruolo: ${acc.role}</small></div>
+            <button type="button" class="btn-secondary" onclick="toggleRole('${acc.email}')">Cambia Ruolo</button>`;
+          uBox.append(row);
+        });
+      }
     }
 
     const reports = JSON.parse(localStorage.getItem('osinthub_reports') || '[]');

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Accesso e Registrazione | OSINTHUB-ITA</title>
-  <link rel="stylesheet" href="style.css?v=5.1">
+  <link rel="stylesheet" href="style.css?v=6.0">
 </head>
 <body>
   <header>
@@ -119,11 +119,16 @@
         });
         const data = await res.json();
         if(!res.ok) throw new Error(data.error_description || data.msg || 'Errore autenticazione');
+        const role = (data.user?.app_metadata?.role === 'admin' || isAdmin) ? 'admin' : 'user';
         if(mode === 'register'){
+          await fetch(SUPABASE_URL + '/rest/v1/profiles', {
+            method: 'POST',
+            headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + (data.access_token || SUPABASE_ANON_KEY), 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ id: data.user?.id, email, display_name: name, role })
+          }).catch(()=>{});
           setStatus('Registrazione completata! Controlla la tua casella email per confermare l’account.');
           return;
         }
-        const role = (data.user?.app_metadata?.role === 'admin' || isAdmin) ? 'admin' : 'user';
         localStorage.setItem('osinthub_user', JSON.stringify({ email, name, role, token: data.access_token, guest: false }));
         localStorage.setItem('legalSeen', '1');
         location.href = 'index.html?logged=1';
