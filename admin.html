@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Pannello Amministratore | OSINTHUB-ITA</title>
-  <link rel="stylesheet" href="style.css?v=6.0">
+  <link rel="stylesheet" href="style.css?v=9.0">
 </head>
 <body>
   <header>
@@ -95,18 +95,22 @@
   <script>
   'use strict';
   const $ = id => document.getElementById(id);
-  // Hash SHA-256 della password amministratore "123456Asdfgh" (mai esposta in chiaro)
   const ADMIN_PASS_HASH = 'c8d45d05a4ea4c7353d3be06e4ef1bc45be7e822ba895bcbe422f71c432b38bb';
 
-  // Configurazione Supabase (inserisci qui URL e Anon Key per sincronizzare gli utenti tra PC e smartphone)
   const SUPABASE_URL = '';
   const SUPABASE_ANON_KEY = '';
 
   let tools = [];
 
-  async function sha256(str){
-    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  async function verifyAdminPass(str){
+    if(window.crypto && window.crypto.subtle){
+      try{
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        const hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        return hex === ADMIN_PASS_HASH;
+      }catch{}
+    }
+    return btoa(str) === 'MTIzNDU2QXNkZmdo';
   }
 
   function checkAdminAccess(){
@@ -123,8 +127,8 @@
 
   $('unlockAdminBtn').onclick = async () => {
     const val = $('adminPinInput').value.trim();
-    const h = await sha256(val);
-    if(h === ADMIN_PASS_HASH){
+    const ok = await verifyAdminPass(val);
+    if(ok){
       sessionStorage.setItem('osinthub_admin_unlocked', '1');
       checkAdminAccess();
     } else {

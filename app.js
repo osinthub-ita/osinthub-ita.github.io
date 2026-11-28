@@ -1,4 +1,4 @@
- 'use strict';
+'use strict';
 const $=id=>document.getElementById(id), el=(tag,text='')=>{const n=document.createElement(tag);n.textContent=text;return n};
 
 const CONSENT_KEY = 'osinthub_cookie_consent_v1';
@@ -282,10 +282,8 @@ document.addEventListener('DOMContentLoaded', () => {
     runBootSequence();
     window.history.replaceState({}, document.title, 'index.html');
   } else if (activeUser && !activeUser.guest) {
-    // Real logged in user, skip modal
     if(welcomeModal) welcomeModal.style.display = 'none';
   } else {
-    // Show welcome modal on every fresh session / open / guest visit so user always sees it
     if(welcomeModal) welcomeModal.style.display = 'flex';
   }
 
