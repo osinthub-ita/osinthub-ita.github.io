@@ -111,66 +111,122 @@ function syncUserNav(){
   }
 }
 
-/* ===== TERMINALE HACKER IMMEDIATO ALL'APERTURA + SCELTA ACCESSO SUCCESSIVA ===== */
+/* ===== TERMINALE HACKER FOSFORO VERDE + MATRIX RAIN + TYPEWRITER ===== */
+function startMatrixRain(canvas){
+  if(!canvas) return () => {};
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+  const chars = '0123456789ABCDEF01010110#$%@*+=-<>[]{}';
+  const fontSize = 14;
+  let columns = Math.floor(w / fontSize);
+  let drops = Array(columns).fill(1);
+
+  const onResize = () => {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    columns = Math.floor(w / fontSize);
+    drops = Array(columns).fill(1);
+  };
+  window.addEventListener('resize', onResize);
+
+  const interval = setInterval(() => {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = '#00ff41';
+    ctx.font = fontSize + 'px ui-monospace, monospace';
+    for(let i = 0; i < drops.length; i++){
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      if(drops[i] * fontSize > h && Math.random() > 0.975){
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }, 45);
+
+  return () => {
+    clearInterval(interval);
+    window.removeEventListener('resize', onResize);
+  };
+}
+
 function runBootSequence(){
   const overlay = $('hackerTerminal');
   const out = $('terminalOutput');
   const welcomeModal = $('welcome');
+  const canvas = $('matrixCanvas');
   if(!overlay || !out) return;
 
   overlay.style.display = 'grid';
   overlay.hidden = false;
   out.textContent = '';
 
+  const stopMatrix = startMatrixRain(canvas);
+
   const urlParams = new URLSearchParams(window.location.search);
   const justLoggedIn = urlParams.get('logged') === '1';
 
   const lines = justLoggedIn ? [
-    '[AUTH] Verifica credenziali e token sessione... OK',
-    '[NET]  Handshake TLS 1.3 con nodo edge Cloudflare... ATTIVO',
-    '[SCAN] Scansione pacchetti in ingresso: 0x4F 0x53 0x49 0x4E 0x54',
-    '[GEO]  Telemetria IP/ASN e controllo VPN... OPERATIVO',
-    '[SYS]  Accesso autenticato completato. Benvenuto operatore.',
-    '>> Clicca ovunque sullo schermo per entrare nel portale...'
+    'root@osinthub-ita:~# verify --session-token --tls1.3',
+    '[OK] Handshake crittografico TLS 1.3 stabilito (AES-256-GCM)',
+    '[OK] Nodo Edge Cloudflare attivo · Protezione anti-leak DNS',
+    '[OK] Modulo telemetria IP / ASN / VPN sincronizzato',
+    '[████████████████████] 100% — SESSIONE AUTENTICATA ATTIVA',
+    '> Accesso autorizzato. Premi o clicca ovunque per entrare...'
   ] : [
-    '[INIT] Avvio kernel OSINTHUB-ITA v4.0...',
-    '[NET]  Handshake TLS 1.3 con nodo edge Cloudflare... OK',
-    '[SCAN] Scansione pacchetti in ingresso: 0x4F 0x53 0x49 0x4E 0x54',
-    '[DNS]  Verifica resolver e protezione leak... ATTIVO',
-    '[GEO]  Interrogazione modulo telemetria IP/ASN... PRONTO',
-    '[SYS]  Inizializzazione completata.',
-    '>> Clicca ovunque sullo schermo per scegliere la modalità di accesso...'
+    'root@osinthub-ita:~# ./init_osint_kernel.sh --stealth',
+    '[0.04s] Montaggio filesystem cifrato in memoria... [OK]',
+    '[0.12s] Handshake TLS 1.3 con Cloudflare Edge Worker... [OK]',
+    '[0.21s] Scansione socket & rilevamento proxy/VPN... [ATTIVO]',
+    '[0.34s] Caricamento indici OSINT, Dorking, SOCMINT... [OK]',
+    '[████████████████████] 100% — SISTEMA PRONTO',
+    '> Premi o clicca ovunque per selezionare la modalità di accesso...'
   ];
 
-  let idx = 0;
-  let timer = setInterval(() => {
-    if(idx < lines.length){
-      out.textContent += lines[idx] + '\n';
-      out.scrollTop = out.scrollHeight;
-      idx++;
-    } else {
-      clearInterval(timer);
+  let lineIdx = 0;
+  let charIdx = 0;
+  let currentBuffer = '';
+  let stopped = false;
+
+  const typeNext = () => {
+    if(stopped) return;
+    if(lineIdx >= lines.length){
+      out.innerHTML = currentBuffer.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '<span class="term-cursor">█</span>';
+      return;
     }
-  }, 200);
+    const line = lines[lineIdx];
+    if(charIdx < line.length){
+      currentBuffer += line[charIdx];
+      charIdx++;
+      out.innerHTML = currentBuffer.replace(/&/g,'&amp;').replace(/</g,'&lt;') + '<span class="term-cursor">█</span>';
+      out.scrollTop = out.scrollHeight;
+      setTimeout(typeNext, 14);
+    } else {
+      currentBuffer += '\n';
+      lineIdx++;
+      charIdx = 0;
+      setTimeout(typeNext, 90);
+    }
+  };
+  typeNext();
 
   let closed = false;
   const closeTerminal = () => {
     if(closed) return;
     closed = true;
-    clearInterval(timer);
+    stopped = true;
+    stopMatrix();
     overlay.classList.add('fade-out');
     setTimeout(() => {
       overlay.style.display = 'none';
       overlay.hidden = true;
       overlay.classList.remove('fade-out');
 
-      // Se l'utente ha appena effettuato il login, entra direttamente senza mostrare la scelta ospite/login
       if(justLoggedIn){
         window.history.replaceState({}, document.title, 'index.html');
         return;
       }
-
-      // Altrimenti mostra subito la scelta tra Ospite / Accedi / Registrati
       if(welcomeModal){
         welcomeModal.style.display = 'grid';
       }

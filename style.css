@@ -84,17 +84,21 @@ footer{border-top:1px solid #183340;font-size:13px}
 .auth-status{padding:10px 12px;border:1px solid #22c55e;border-radius:8px;background:#07151a;font-size:14px;margin-bottom:12px}
 .active-account-box{margin-top:16px;padding:14px;border:1px solid #28677b;border-radius:10px;background:#081622}
 
-/* Terminale Hacker a Tutto Schermo */
-.hacker-terminal{position:fixed;inset:0;z-index:10000;background:#02060a;display:grid;place-items:center;padding:20px;cursor:pointer;transition:opacity .28s ease}
+/* Terminale Hacker Fosforo Verde & Matrix Rain */
+.hacker-terminal{position:fixed;inset:0;z-index:10000;background:#000000;display:grid;place-items:center;padding:20px;cursor:pointer;transition:opacity .28s ease;overflow:hidden}
 .hacker-terminal.fade-out{opacity:0;pointer-events:none}
-.terminal-window{width:100%;max-width:680px;background:#040d14;border:1px solid #00e5ff;border-radius:12px;box-shadow:0 0 40px #00e5ff26;overflow:hidden}
-.terminal-header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#081926;border-bottom:1px solid #153c4f}
+.matrix-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0.22;pointer-events:none}
+.crt-scanlines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.28) 0px,rgba(0,0,0,0.28) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:1}
+.terminal-window{position:relative;z-index:2;width:100%;max-width:720px;background:rgba(0,8,2,0.94);border:1px solid #00ff41;border-radius:8px;box-shadow:0 0 35px rgba(0,255,65,0.22),inset 0 0 18px rgba(0,255,65,0.06);overflow:hidden}
+.terminal-header{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#021406;border-bottom:1px solid #0b4d1c}
 .terminal-header .dot{width:11px;height:11px;border-radius:50%}
-.terminal-header .red{background:#ef4444}.terminal-header .amber{background:#f59e0b}.terminal-header .green{background:#22c55e}
-.terminal-title{margin-left:8px;font:700 12px ui-monospace,monospace;color:#7dd3fc}
-.terminal-body{margin:0;padding:20px;min-height:220px;max-height:60vh;overflow-y:auto;font:14px/1.6 ui-monospace,monospace;color:#34d399;white-space:pre-wrap}
-.terminal-footer{padding:10px 14px;background:#06131d;border-top:1px solid #153c4f;text-align:center;font:700 12px ui-monospace,monospace;color:#30dfff;animation:pulseText 1.4s infinite}
-@keyframes pulseText{0%,100%{opacity:1}50%{opacity:.45}}
+.terminal-header .red{background:#ef4444}.terminal-header .amber{background:#f59e0b}.terminal-header .green{background:#00ff41;box-shadow:0 0 8px #00ff41}
+.terminal-title{margin-left:8px;font:700 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#00ff41;text-shadow:0 0 6px rgba(0,255,65,0.5)}
+.terminal-body{margin:0;padding:22px;min-height:230px;max-height:62vh;overflow-y:auto;font:14px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#00ff41;text-shadow:0 0 5px rgba(0,255,65,0.45);white-space:pre-wrap}
+.term-cursor{display:inline-block;color:#00ff41;animation:blinkCursor .75s steps(1) infinite}
+@keyframes blinkCursor{0%,49%{opacity:1}50%,100%{opacity:0}}
+.terminal-footer{padding:11px 14px;background:#010d04;border-top:1px solid #0b4d1c;text-align:center;font:700 12px ui-monospace,monospace;color:#00ff41;letter-spacing:.12em;animation:pulseText 1.4s infinite}
+@keyframes pulseText{0%,100%{opacity:1}50%{opacity:.4}}
 
 /* Modale Scelta Accesso (Ospite / Login / Registrati) */
 .welcome-overlay{position:fixed;inset:0;z-index:9998;background:rgba(3,8,14,0.92);display:none;place-items:center;padding:20px}

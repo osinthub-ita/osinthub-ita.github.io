@@ -4,18 +4,20 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   <title>OSINTHUB-ITA</title>
-  <link href="style.css?v=4.0" rel="stylesheet"/>
+  <link href="style.css?v=4.1" rel="stylesheet"/>
 </head>
 <body class="home">
-  <!-- Sequenza Terminale Hacker Immediata all'apertura -->
+  <!-- Sequenza Terminale Hacker Fosforo Verde & Matrix Rain all'apertura -->
   <div id="hackerTerminal" class="hacker-terminal" aria-live="polite">
+    <canvas id="matrixCanvas" class="matrix-canvas" aria-hidden="true"></canvas>
+    <div class="crt-scanlines" aria-hidden="true"></div>
     <div class="terminal-window" onclick="event.stopPropagation()">
       <div class="terminal-header">
         <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
-        <span class="terminal-title">OSINTHUB-ITA // SECURE SHELL v4.0</span>
+        <span class="terminal-title">root@osinthub-ita:~# ./boot_intel_shell.sh --secure</span>
       </div>
       <pre id="terminalOutput" class="terminal-body"></pre>
-      <div class="terminal-footer">[ CLICCA OVUNQUE PER PROSEGUIRE ]</div>
+      <div class="terminal-footer">[ CLICCA OVUNQUE PER CONTINUARE ]</div>
     </div>
   </div>
 
@@ -89,7 +91,7 @@
 
   <main>
     <section class="hero hero-clean" aria-label="Banner OSINTHUB-ITA">
-      <img alt="OSINTHUB-ITA Cybersecurity & OSINT Intelligence" class="hero-banner-img" src="hero.webp?v=4"/>
+      <img alt="OSINTHUB-ITA Cybersecurity & OSINT Intelligence" class="hero-banner-img" src="hero.webp"/>
     </section>
 
     <section aria-label="Catalogo OSINT" id="catalogo">
@@ -165,7 +167,7 @@
     </div>
   </aside>
 
-  <script src="app.js?v=4.0"></script>
-  <script src="intelligence.js?v=4.0"></script>
+  <script src="app.js?v=4.1"></script>
+  <script src="intelligence.js?v=4.1"></script>
 </body>
 </html>
